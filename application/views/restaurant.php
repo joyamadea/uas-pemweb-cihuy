@@ -8,12 +8,10 @@
 <body>
 
     <h1>Restaurant</h1>
-
+    <div class="card-columns">            
     <?php 
 		foreach($food as $f){ 
         ?>        
-        <div class="row">
-            
             <div class="card mb-5">
                 <img class="card-img-top" alt="picture of product" src="<?php echo $f->photoLink ?>" height="200px" width="200px">
                 <div class="body m-3">
@@ -22,7 +20,8 @@
                     <p class="card-text"><?php echo $f->price ?></p>
                 </div>
             </div>
-        </div>
 		<?php } ?>
+    </div>
+
 </body>
 </html>
