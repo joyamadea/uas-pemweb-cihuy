@@ -6,6 +6,14 @@
 
 </head>
 <body>
+
     <p>This works yo</p>
+
+    <?php 
+		foreach($food as $f){ 
+        ?>        
+        <?php echo $f->foodName ?>
+        <br>
+		<?php } ?>
 </body>
 </html>
