@@ -6,7 +6,6 @@ class Restaurant extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
 		$this->load->model('menu');
-                $this->load->helper('url');
 	}
 
 	public function index()

@@ -7,13 +7,22 @@
 </head>
 <body>
 
-    <p>This works yo</p>
+    <h1>Restaurant</h1>
 
     <?php 
 		foreach($food as $f){ 
         ?>        
-        <?php echo $f->foodName ?>
-        <br>
+        <div class="row">
+            
+            <div class="card mb-5">
+                <img class="card-img-top" alt="picture of product" src="<?php echo $f->photoLink ?>" height="200px" width="200px">
+                <div class="body m-3">
+                    <p class="card-title"><b><?php echo $f->foodName ?></b></p>
+                    <p class="card-text"><?php echo $f->desc ?></p>
+                    <p class="card-text"><?php echo $f->price ?></p>
+                </div>
+            </div>
+        </div>
 		<?php } ?>
 </body>
 </html>
