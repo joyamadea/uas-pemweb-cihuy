@@ -10,7 +10,10 @@ class Restaurant extends CI_Controller {
 
 	public function index()
 	{
+		$data['style'] = $this->load->view('include/style',NULL,TRUE);
+		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+
 		$data['food'] = $this->menu->show_data()->result();
-		$this->load->view('restaurant.php', $data);
+		$this->load->view('pages/restaurant.php', $data);
 	}
 }

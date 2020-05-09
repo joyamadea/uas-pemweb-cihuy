@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <?php echo $style; ?>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
 		foreach($food as $f){ 
         ?>        
             <div class="card mb-5">
-                <img class="card-img-top" alt="picture of product" src="<?php echo $f->photoLink ?>" height="200px" width="200px">
+                <img class="card-img-top" alt="picture of product" src="<?php echo $f->photoLink ?>" width="200px">
                 <div class="body m-3">
                     <p class="card-title"><b><?php echo $f->foodName ?></b></p>
                     <p class="card-text"><?php echo $f->desc ?></p>
@@ -23,5 +23,7 @@
 		<?php } ?>
     </div>
 
+
+    <?php echo $script; ?>
 </body>
 </html>
