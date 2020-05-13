@@ -20,7 +20,10 @@ class Admin extends CI_Controller {
     
 	public function index()
 	{
-
+        $data['style'] = $this->load->view('include/style',NULL,TRUE);
+        $data['script'] = $this->load->view('include/script',NULL,TRUE);
+        
+        $this->load->view('pages/adminlogin.php', $data);
     }
     
     public function setup(){
