@@ -16,4 +16,12 @@ class Restaurant extends CI_Controller {
 		$data['food'] = $this->menu->show_data()->result();
 		$this->load->view('pages/restaurant.php', $data);
 	}
+
+	public function product()
+	{
+        $data['style'] = $this->load->view('include/style',NULL,TRUE);
+        $data['script'] = $this->load->view('include/script',NULL,TRUE);
+        
+        $this->load->view('pages/product.php', $data);
+    }
 }
