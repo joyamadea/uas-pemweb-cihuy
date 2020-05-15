@@ -8,7 +8,7 @@ class Admin extends CI_Controller {
 		parent::__construct();
 
 		$this->load->database();
-		$this->load->helper('url');
+        $this->load->helper('url');
 
 		$this->load->library('grocery_CRUD');
 	}
@@ -29,7 +29,8 @@ class Admin extends CI_Controller {
     public function setup(){
         //$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
         $data['style'] = $this->load->view('include/style',NULL,TRUE);
-		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
         $data['output'] = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
         $data['output'] = (array)$data['output'];
 		//$data['food'] = $this->menu->show_data()->result();
@@ -38,7 +39,8 @@ class Admin extends CI_Controller {
 
     public function food(){
         $data['style'] = $this->load->view('include/style',NULL,TRUE);
-		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
         $crud = new grocery_CRUD();
 
         $crud->set_theme('datatables');
@@ -58,7 +60,8 @@ class Admin extends CI_Controller {
 
     public function food_category(){
         $data['style'] = $this->load->view('include/style',NULL,TRUE);
-		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
         $crud = new grocery_CRUD();
 
         $crud->set_theme('datatables');
