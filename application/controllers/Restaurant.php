@@ -20,7 +20,10 @@ class Restaurant extends CI_Controller {
 	public function product()
 	{
         $data['style'] = $this->load->view('include/style',NULL,TRUE);
-        $data['script'] = $this->load->view('include/script',NULL,TRUE);
+		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+		$id = $this->uri->segment(3);
+		$data['details'] = $this->menu->detail_prod($id);
+		
         
         $this->load->view('pages/product.php', $data);
     }
