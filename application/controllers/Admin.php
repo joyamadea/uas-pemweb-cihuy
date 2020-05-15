@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
 
 		$this->load->database();
         $this->load->helper('url');
+        $this->load->model('stats');
 
 		$this->load->library('grocery_CRUD');
 	}
@@ -24,6 +25,15 @@ class Admin extends CI_Controller {
         $data['script'] = $this->load->view('include/script',NULL,TRUE);
         
         $this->load->view('pages/adminlogin.php', $data);
+    }
+
+    public function statistics(){
+        $data['style'] = $this->load->view('include/style',NULL,TRUE);
+        $data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
+        $data['trans'] = $this->stats->daily_data();
+        
+        $this->load->view('pages/statistics.php', $data);
     }
     
     public function setup(){
