@@ -37,9 +37,9 @@
  
      <p>Birth Date:</p>
      <p>
-     <input type="date" name="birthdate" value="<?php echo set_value('birthdate'); ?>"/>
+     <input type="date" name="birthDate" value="<?php echo set_value('birthDate'); ?>"/>
      </p>
-     <p> <?php echo form_error('birthdate'); ?> </p>
+     <p> <?php echo form_error('birthDate'); ?> </p>
 
      <p>
      <input type="submit" name="btnSubmit" value="Daftar" />
@@ -48,7 +48,7 @@
      <?php echo form_close();?>
  
      <p>
-     Kembali ke beranda, Silakan klik <?php echo anchor(site_url().'/first_page','di sini..'); ?>
+     Kembali ke beranda, Silakan klik <?php echo anchor(site_url().'/beranda','di sini..'); ?>
      </p>
  </body>
  </html>

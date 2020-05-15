@@ -23,7 +23,7 @@
          }else{
              echo '<script>console.log("Salah")</script>';
              $data['displayName']   =    $this->input->post('displayName');
-             $data['password'] =    password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+             $data['password'] =    password_hash($this->input->post('password'), PASSWORD_BCRYPT);
              $data['email']  =    $this->input->post('email');
              $data['birthDate']  =    $this->input->post('birthDate');
  

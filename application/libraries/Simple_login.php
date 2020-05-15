@@ -25,21 +25,25 @@
      public function login($email, $password) {
          
          //cek email dan password
-         $query = $this->CI->db->get_where('user',array('email'=>$email,'password' => password_hash($password, PASSWORD_DEFAULT)));
+         $query = $this->CI->db->get_where('user',array('email'=>$email,'password' => $password));
  
          if($query->num_rows() == 1) {
              //ambil data user berdasar email
              $row  = $this->CI->db->query('SELECT custID FROM user where email = "'.$email.'"');
-             $admin     = $row->row();
+             $admin= $row->row();
              $id   = $admin->custID;
  
-             //set session user
-             $this->CI->session->set_userdata('email', $email);
-             $this->CI->session->set_userdata('id_login', uniqid(rand()));
-             $this->CI->session->set_userdata('id', $id);
- 
-             //redirect ke halaman dashboard
-             redirect(site_url('dashboard'));
+            if(password_verify($password, $row["password"]))  
+                {  
+                    //set session user
+                    $this->CI->session->set_userdata('email', $email);
+                    $this->CI->session->set_userdata('id_login', uniqid(rand()));
+                    $this->CI->session->set_userdata('id', $id);
+                    //redirect ke halaman dashboard
+                    redirect(site_url('dashboard'));
+                } 
+
+
          }else{
  
              //jika tidak ada, set notifikasi dalam flashdata.
