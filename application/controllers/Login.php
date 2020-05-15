@@ -21,32 +21,33 @@
  
          if($valid->run()) {
              $res=$this->M_account->login($email);
+             if($res==false){
+                echo "login tidak sukses (email)";
+            }
+            else{
+                foreach($res as $r){
+                    $hash=$r->password;
+                    $dispName=$r->displayName;
+                }
+
+                if(password_verify($password,$hash)){
+                    $this->session->set_userdata('email',$email);
+                    $this->session->set_userdata('login_id',uniqid(rand()));
+                    $this->session->set_userdata('name',$dispName);
+                    echo "login sukses dgn nama ".$this->session->userdata('name');
+                }
+                else{
+                    echo "login tidak sukses";
+                }
+            }
          }
 
-         if($res==false){
-             echo "login tidak sukses (email)";
-         }
-         else{
-             foreach($res as $r){
-                $hash=$r->password;
-                $dispName=$r->displayName;
-             }
-
-             if(password_verify($password,$hash)){
-                $this->session->set_userdata('email',$email);
-                $this->session->set_userdata('login_id',uniqid(rand()));
-                $this->session->set_userdata('name',$dispName);
-                 echo "login sukses dgn nama ".$this->session->userdata('name');
-             }
-             else{
-                 echo "login tidak sukses";
-             }
-         }
+         
          // End fungsi login
          $this->load->view('account/v_login');
      }
  
      public function logout(){
-         $this->simple_login->logout();
+         // $this->simple_login->logout();
      }        
  }
