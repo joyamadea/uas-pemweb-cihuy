@@ -14,8 +14,8 @@
                 Setup
                 </a>
                 <div class="dropdown-menu <?php if($this->uri->segment(2) == 'setup') echo 'active'; ?>" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item <?php if($this->uri->segment(3) == 'food') echo 'active'; ?>" href="<?php echo site_url('admin/setup/food'); ?>">Food</a>
-                <a class="dropdown-item <?php if($this->uri->segment(3) == 'food_category') echo 'active'; ?>" href="<?php echo site_url('admin/setup/food_category'); ?>">Food Category</a>
+                <a class="dropdown-item <?php if($this->uri->segment(2) == 'food') echo 'active'; ?>" href="<?php echo site_url('admin/food'); ?>">Food</a>
+                <a class="dropdown-item <?php if($this->uri->segment(2) == 'food_category') echo 'active'; ?>" href="<?php echo site_url('admin/food_category'); ?>">Food Category</a>
                 </div>
             </li>
             <li class="nav-item">

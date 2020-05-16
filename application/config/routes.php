@@ -52,6 +52,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'restaurant';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-
-$route['admin/setup/food'] = 'admin/food';
-$route['admin/setup/food_category'] = 'admin/food_category';
