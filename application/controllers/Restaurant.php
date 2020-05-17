@@ -26,13 +26,8 @@ class Restaurant extends CI_Controller {
 
 
         if (isset($search) && !empty($searchInput) && !empty($field) ) {
-			if($field=="foodCategory"){
-				$query = $this->db->get_where('foodCategory',array('categoryName' => $searchInput));
-				foreach ($query->result() as $row){
-        			$searchInput = $row->categoryID;
-				}
-			}
-            $data['food'] = $this->menu->getDataWhere($field, $searchInput);
+			$data['food'] = $this->menu->getDataWhere($field, $searchInput);
+			
         } else if (isset($sort) && !empty($fieldSort)) {
 			$data['food'] = $this->menu->sortData($fieldSort);
 			
