@@ -21,12 +21,12 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Food Table</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <a href="<?php echo site_url('admin/add/food'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Record</a>
                     </div>
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Total Earnings</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Records</h6>
                         </div>
                         <div class="card-body">
                         <div class="table-responsive">
@@ -57,13 +57,18 @@
                                 <?php foreach($output as $o){
                                     echo "<tr>";
                                     echo "<td>".$o->foodName."</td>";
-                                    echo "<td>".$o->foodCategory."</td>";
+                                    foreach($cat as $c){
+                                        if($o->foodCategory == $c->categoryID){
+                                            echo "<td>".$c->categoryName."</td>";
+                                        }
+                                    }
+                                    
                                     echo "<td>".$o->stock."</td>";
                                     echo "<td><img style='height:100px;' src='".site_url('assets/uploads/files/').$o->photoLink."'</td>";
                                     echo "<td>".$o->desc."</td>";
                                     echo "<td>".$o->price."</td>";
                                     echo "<td>";
-                                        echo "<a href='#' class='btn btn-info btn-block mr-3'>";
+                                        echo "<a href='".site_url('admin/edit/food/'.$o->foodID)."' class='btn btn-info btn-block mr-3'>";
                                         echo "<i class='fas fa-pencil-alt'></i>";
                                         echo "</a>";
 

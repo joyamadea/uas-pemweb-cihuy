@@ -20,7 +20,7 @@
                 <div class="container-fluid">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Food Table</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Users Table</h1>
                         <a href="<?php echo site_url('admin/add/food_category'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">Add Category</a>
                     </div>
 
@@ -30,35 +30,30 @@
                         </div>
                         <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="categoryTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="userTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Category ID</th>
-                                    <th>Category</th>
-                                    <th>Action</th>
+                                    <th>Email</th>
+                                    <th>Display Name</th>
+                                    <th>Birth Date</th>
+                                    <th>Profile Picture</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Category ID</th>
-                                    <th>Category</th>
-                                    <th>Action</th>
+                                <th>Email</th>
+                                    <th>Display Name</th>
+                                    <th>Birth Date</th>
+                                    <th>Profile Picture</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 <?php foreach($output as $o){
                                     echo "<tr>";
-                                    echo "<td>".$o->categoryID."</td>";
-                                    echo "<td>".$o->categoryName."</td>";
-                                    echo "<td>";
-                                        echo "<a href='".site_url('admin/edit/food_category/'.$o->categoryID)."' class='btn btn-warning btn-circle mr-3'>";
-                                        echo "<i class='fas fa-pencil-alt'></i>";
-                                        echo "</a>";
-
-                                        echo "<a href='#' class='btn btn-danger btn-circle'>";
-                                        echo "<i class='fas fa-trash'></i>";
-                                        echo "</a>";
-                                    echo "</td>";
+                                    echo "<td>".$o->email."</td>";
+                                    echo "<td>".$o->displayName."</td>";
+                                    echo "<td>".$o->birthDate."</td>";
+                                    echo "<td><img style='height:100px;' src='".site_url('assets/uploads/profile/').$o->profileLink."'</td>";
                                 }?>
                                 
                             </tbody>
@@ -75,15 +70,10 @@
         </div>
     </div>
     
-
-    <!-- <div class="container">
-        <canvas id="myChart"></canvas>
-    </div> -->
-    
     <?php echo $script; ?>
     <script>
         $(document).ready(function() {
-            $('#categoryTable').DataTable();
+            $('#userTable').DataTable();
         })
     </script>
 </body>

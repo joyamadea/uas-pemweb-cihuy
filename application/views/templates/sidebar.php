@@ -28,7 +28,7 @@
 </div>
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item <?php if($this->uri->segment(2) == 'food' || $this->uri->segment(2) == 'food_category') echo 'active'; ?>">
+<li class="nav-item <?php if($this->uri->segment(2) == 'food' || $this->uri->segment(2) == 'food_category' || $this->uri->segment(2) == 'user' || $this->uri->segment(2) == 'edit' || $this->uri->segment(2) == 'add') echo 'active'; ?>">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
     <i class="fas fa-fw fa-table"></i>
     <span>Table Setup</span>
@@ -37,7 +37,7 @@
     <div class="bg-white py-2 collapse-inner rounded">
       <a class="collapse-item" href="<?php echo site_url('admin/food');?>">Food</a>
       <a class="collapse-item" href="<?php echo site_url('admin/food_category');?>">Food Category</a>
-      <a class="collapse-item" href="forgot-password.html">Users</a>
+      <a class="collapse-item" href="<?php echo site_url('admin/users');?>">Users</a>
     </div>
   </div>
 </li>
