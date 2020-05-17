@@ -6,6 +6,13 @@ class Menu extends CI_Model{
 	}	
 	public function getDataWhere($field, $search)
 	{
+		if($field=="foodCategory"){
+			$query = $this->db->get_where('foodCategory',array('categoryName' => $search));
+			foreach ($query->result() as $row){
+				$search = $row->categoryID;
+			}
+		}
+
 		$query = $this->db->like($field, $search)->get('food');
 		return $query->result();
 	}
