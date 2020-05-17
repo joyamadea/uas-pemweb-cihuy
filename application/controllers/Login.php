@@ -34,7 +34,9 @@
                     $this->session->set_userdata('email',$email);
                     $this->session->set_userdata('login_id',uniqid(rand()));
                     $this->session->set_userdata('name',$dispName);
-                    echo "login sukses dgn nama ".$this->session->userdata('name');
+
+                    redirect(base_url());
+                    
                 }
                 else{
                     echo "login tidak sukses";
@@ -47,7 +49,9 @@
          $this->load->view('account/v_login');
      }
  
-     public function logout(){
-         // $this->simple_login->logout();
+     public function out(){
+         
+         $this->session->sess_destroy();
+         redirect('default_controller','refresh');
      }        
  }

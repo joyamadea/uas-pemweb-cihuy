@@ -6,13 +6,16 @@ class Restaurant extends CI_Controller {
 	function __construct(){
 		parent::__construct();		
 		$this->load->model('menu');
+		$this->load->library(array('form_validation','session'));
 	}
 
 	public function index()
 	{
+		
 		$data['style'] = $this->load->view('include/style',NULL,TRUE);
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
 		$data['category'] = $this->menu->getAllCategory();
+		$data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
 
 		$search = $this->input->post('search');
 		$field  = $this->input->post('field');
@@ -27,6 +30,7 @@ class Restaurant extends CI_Controller {
 
         if (isset($search) && !empty($searchInput) && !empty($field) ) {
 			$data['food'] = $this->menu->getDataWhere($field, $searchInput);
+			$data['search'] = $search;
 			
         } else if (isset($sort) && !empty($fieldSort)) {
 			$data['food'] = $this->menu->sortData($fieldSort);
@@ -40,6 +44,17 @@ class Restaurant extends CI_Controller {
 
 		$this->load->view('pages/restaurant.php', $data);
 	}
+
+	public function out(){
+         
+		$this->session->sess_destroy();
+
+		$this->cache->clean();
+
+        ob_clean();
+		redirect('default_controller','refresh');
+	} 
+
  
 	public function product()
 	{
@@ -50,5 +65,5 @@ class Restaurant extends CI_Controller {
 		
         
         $this->load->view('pages/product.php', $data);
-    }
+	}
 }

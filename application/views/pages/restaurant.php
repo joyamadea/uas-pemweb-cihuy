@@ -22,21 +22,12 @@
     </style>
 </head>
 <body>
-
-    <h1 align="center">Restaurant</h1>
+    <?php echo $navbar; ?>
     
 
     <div class="container mt-5">
         <div class="row">
-            <form class="form-inline col-5" action="<?php echo base_url(); ?>" method="post">
-                <select class="form-control" name="field">
-                    <option selected="selected" disabled="disabled" value="">Search By</option>
-                    <option value="foodName">Food Name</option>
-                    <option value="foodCategory">Category</option>
-                </select>
-                <input class="form-control" type="text" name="searchInput" value="" placeholder="Search...">
-                <input class="btn" type="submit" name="search" value="Go">
-            </form>
+            
 
             <form class="form-inline col-3" action="<?php echo base_url(); ?>" method="post">
                 <select class="form-control" name="fieldFilter">
