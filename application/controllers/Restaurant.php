@@ -16,27 +16,35 @@ class Restaurant extends CI_Controller {
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
 		$data['category'] = $this->menu->getAllCategory();
 		$data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
+		$data['food'] = $this->menu->show_data()->result();
 
+		$this->load->view('pages/restaurant.php', $data);
+	}
+
+	public function filter(){
+
+		$data['style'] = $this->load->view('include/style',NULL,TRUE);
+		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+		$data['category'] = $this->menu->getAllCategory();
+		$data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
 		$search = $this->input->post('search');
 		$field  = $this->input->post('field');
 		$searchInput = $this->input->post('searchInput');
 		
-		$sort = $this->input->post('sort');
 		$fieldSort  = $this->input->post('fieldSort');
 
 		$fieldFilter  = $this->input->post('fieldFilter');
-		$filter  = $this->input->post('filter');
-
-
+		
         if (isset($search) && !empty($searchInput) && !empty($field) ) {
 			$data['food'] = $this->menu->getDataWhere($field, $searchInput);
 			$data['search'] = $search;
 			
-        } else if (isset($sort) && !empty($fieldSort)) {
+        } else if (!empty($fieldSort)) {
 			$data['food'] = $this->menu->sortData($fieldSort);
 			
-        } else if (isset($filter) && !empty($fieldFilter)) {
+        } else if (!empty($fieldFilter)) {
 			$data['food'] = $this->menu->getDataOf($fieldFilter);
+			$data['selected'] = $fieldFilter;
 			
         }else {
 			$data['food'] = $this->menu->show_data()->result();
@@ -60,6 +68,7 @@ class Restaurant extends CI_Controller {
 	{
         $data['style'] = $this->load->view('include/style',NULL,TRUE);
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+		$data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
 		$id = $this->uri->segment(3);
 		$data['details'] = $this->menu->detail_prod($id);
 		

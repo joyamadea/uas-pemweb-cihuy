@@ -29,34 +29,31 @@
         <div class="row">
             
 
-            <form class="form-inline col-3" action="<?php echo base_url(); ?>" method="post">
-                <select class="form-control" name="fieldFilter">
-                    <option selected="selected" disabled="disabled" value="">Filter By</option>
+            <form class="form-inline col-lg-2 col-5" action="<?php echo site_url('restaurant/filter'); ?>" method="post" id="fieldFilter">
+                <select class="form-control" name="fieldFilter" onchange="this.form.submit();">
+                    <option selected="selected" disabled="disabled" value="" >Filter By</option>
                     <?php 
                         foreach($category as $row)
-                        { 
-                        echo '<option value="'.$row->categoryID.'">'.$row->categoryName.'</option>';
-                        }
+                        { ?>
+                            
+                            <option value="<?php echo $row->categoryID; ?>" <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == $row->categoryID) echo "selected";?>><?php echo $row->categoryName;?></option>';
+                        <?php }?>
                     ?>
-                    <option value="<50000">Under Rp. 50.000</option>
-                    <option value="<150000">Under Rp. 150.000</option>
-                    <option value=">250000">Above Rp. 250.000</option>
+                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '<50000') echo "selected";?> value="<50000">Under Rp. 50.000</option>
+                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '<150000') echo "selected";?> value="<150000">Under Rp. 150.000</option>
+                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '>250000') echo "selected";?> value=">250000">Above Rp. 250.000</option>
                 </select>
-                <input class="btn" type="submit" name="filter" value="Go">
             </form>
 
 
-            <form class="form-inline col-4" action="<?php echo base_url();?>" method="post">
-                <select class="form-control" name="fieldSort">
+            <form class="form-inline col-lg-4 col-5" action="<?php echo site_url('restaurant/filter');?>" method="post">
+                <select class="form-control" name="fieldSort" onchange="this.form.submit();">
                     <option selected="selected" disabled="disabled" value="">Sort by</option>
-                    <option value="price asc">Price Ascending</option>
-                    <option value="price desc">Price Descending</option>
-                    <option value="foodName asc">Food Name Ascending</option>
-                    <option value="foodName desc">Food Name Descending</option>
-                    <option value="stock asc">Stock Ascending</option>
-                    <option value="stock desc">Stock Descending</option>
+                    <option <?php if (!empty($this->input->post('fieldSort')) && $this->input->post('fieldSort') == 'price asc') echo "selected";?> value="price asc">Price Ascending</option>
+                    <option <?php if (!empty($this->input->post('fieldSort')) && $this->input->post('fieldSort') == 'price desc') echo "selected";?> value="price desc">Price Descending</option>
+                    <option <?php if (!empty($this->input->post('fieldSort')) && $this->input->post('fieldSort') == 'foodName asc') echo "selected";?> value="foodName asc">A-Z</option>
+                    <option <?php if (!empty($this->input->post('fieldSort')) && $this->input->post('fieldSort') == 'foodName descc') echo "selected";?> value="foodName desc">Z-A</option>
                 </select>
-                <input class="btn" type="submit" name="sort" value="Go">
             </form>
         </div>
     </div>
