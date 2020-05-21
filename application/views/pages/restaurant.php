@@ -69,7 +69,7 @@
                     <div class="body m-3">
                         <p class="card-title"><b><?php echo $f->foodName ?></b></p>
                         <p class="card-text"><?php echo $f->desc ?></p>
-                        <p class="card-text"><?php echo 'Rp. '.$f->price ?></p>
+                        <p class="card-text"><?php echo 'Rp. '.number_format($f->price,0,',','.') ?></p>
                     </div>
                 </div>
                 </a>
