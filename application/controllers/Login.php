@@ -28,12 +28,16 @@
                 foreach($res as $r){
                     $hash=$r->password;
                     $dispName=$r->displayName;
+                    $id=$r->custID;
+                    $pic=$r->profileLink;
                 }
 
                 if(password_verify($password,$hash)){
                     $this->session->set_userdata('email',$email);
                     $this->session->set_userdata('login_id',uniqid(rand()));
                     $this->session->set_userdata('name',$dispName);
+                    $this->session->set_userdata('id',$id);
+                    $this->session->set_userdata('pic',$pic);
 
                     redirect(base_url());
                     
@@ -50,8 +54,7 @@
      }
  
      public function out(){
-         
          $this->session->sess_destroy();
-         redirect('default_controller','refresh');
+         redirect('restaurant','refresh');
      }        
  }

@@ -17,6 +17,17 @@ class Menu extends CI_Model{
 		return $query->result();
 	}
 
+	public function getPrice($id){
+		$query = $this->db->query("SELECT price FROM `food` WHERE `foodID`=$id");
+		return $query->result();
+	}
+
+	public function getFood(){
+		$query = $this->db->query("SELECT foodID, foodName, price FROM `food`");
+		return $query->result();
+	}
+
+
 	public function getDataOf($input)
 	{
 		if(strlen($input)<5){

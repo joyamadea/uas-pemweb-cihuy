@@ -57,10 +57,9 @@ class Restaurant extends CI_Controller {
          
 		$this->session->sess_destroy();
 
-		$this->cache->clean();
 
         ob_clean();
-		redirect('default_controller','refresh');
+		$this->load->view('account/v_login.php');
 	} 
 
  
