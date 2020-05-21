@@ -1,93 +1,251 @@
-CREATE TABLE `User` (
-	`custID` INT(3) NOT NULL AUTO_INCREMENT,
-	`email` varchar(255) NOT NULL,
-	`displayName` varchar(255) NOT NULL,
-	`password` varchar(255) NOT NULL,
-	`fullName` varchar(255) NOT NULL,
-	`birthDate` DATE NOT NULL,
-	`profileLink` varchar(255),
-	PRIMARY KEY (`custID`)
-);
+-- phpMyAdmin SQL Dump
+-- version 5.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 21, 2020 at 01:16 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
-CREATE TABLE `Admin` (
-	`adminID` INT(3) NOT NULL AUTO_INCREMENT,
-	`email` varchar(255) NOT NULL,
-	`displayName` varchar(255) NOT NULL,
-	`password` varchar(255) NOT NULL,
-	`fullName` varchar(255) NOT NULL,
-	`birthDate` DATE NOT NULL,
-	PRIMARY KEY (`adminID`)
-);
-
-CREATE TABLE `Super Admin` (
-	`superAdminID` INT(3) NOT NULL AUTO_INCREMENT,
-	`email` varchar(255) NOT NULL,
-	`displayName` varchar(255) NOT NULL,
-	`password` varchar(255) NOT NULL,
-	`fullName` varchar(255) NOT NULL,
-	`birthDate` DATE NOT NULL,
-	PRIMARY KEY (`superAdminID`)
-);
-
-CREATE TABLE `Food` (
-	`foodID` INT(3) NOT NULL AUTO_INCREMENT,
-	`foodName` varchar(255) NOT NULL,
-	`foodCategory` int(3) NOT NULL,
-	`stock` INT(25) NOT NULL,
-	`photoLink` varchar(255) NOT NULL,
-	`desc` varchar(255) NOT NULL,
-	`price` FLOAT NOT NULL,
-	PRIMARY KEY (`foodID`)
-);
-
-CREATE TABLE `FoodCategory` (
-	`categoryID` INT(3) NOT NULL AUTO_INCREMENT,
-	`categoryName` varchar(255) NOT NULL,
-	PRIMARY KEY (`categoryID`)
-);
-
-CREATE TABLE `Transaction` (
-	`transID` INT(3) NOT NULL AUTO_INCREMENT,
-	`custID` int(3) NOT NULL,
-	`orderDate` DATE NOT NULL,
-	`paymentType` int(3) NOT NULL,
-	`total` FLOAT NOT NULL,
-	`status` BOOLEAN NOT NULL DEFAULT '0',
-	PRIMARY KEY (`transID`)
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-CREATE TABLE `Transaction Detail` (
-	`transID` INT(3) NOT NULL,
-	`foodID` int(3) NOT NULL,
-	`quantity` INT(5) NOT NULL
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE `Payment` (
-	`paymentID` INT(3) NOT NULL,
-	`payment` varchar(15) NOT NULL,
-	PRIMARY KEY (`paymentID`)
-);
+--
+-- Database: `foody`
+--
 
-ALTER TABLE `Food` ADD CONSTRAINT `Food_fk0` FOREIGN KEY (`foodCategory`) REFERENCES `FoodCategory`(`categoryID`);
+-- --------------------------------------------------------
 
-ALTER TABLE `Transaction` ADD CONSTRAINT `Transaction_fk0` FOREIGN KEY (`custID`) REFERENCES `User`(`custID`);
+--
+-- Table structure for table `food`
+--
 
-ALTER TABLE `Transaction` ADD CONSTRAINT `Transaction_fk1` FOREIGN KEY (`paymentType`) REFERENCES `Payment`(`paymentID`);
+CREATE TABLE `food` (
+  `foodID` int(3) NOT NULL,
+  `foodName` varchar(255) NOT NULL,
+  `foodCategory` int(3) NOT NULL,
+  `stock` int(25) NOT NULL,
+  `photoLink` varchar(255) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `price` float NOT NULL,
+  `rating` float NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `Transaction Detail` ADD CONSTRAINT `Transaction Detail_fk0` FOREIGN KEY (`transID`) REFERENCES `Transaction`(`transID`);
+--
+-- Dumping data for table `food`
+--
 
-ALTER TABLE `Transaction Detail` ADD CONSTRAINT `Transaction Detail_fk1` FOREIGN KEY (`foodID`) REFERENCES `Food`(`foodID`);
+INSERT INTO `food` (`foodID`, `foodName`, `foodCategory`, `stock`, `photoLink`, `desc`, `price`, `rating`) VALUES
+(1, 'Mushroom Soup', 1, 8, 'Creamy-Garlic-Mushroom-Soup-spoon.jpg', 'Creamy mushroom soup that will warm your body', 40000, 0),
+(2, 'Chicken Soup', 1, 18, 'soup.jpg', 'Creamy and cheesy chicken soup that will warm your body', 45000, 0),
+(3, 'Tenderloin Steak', 2, 20, '045813900_1489071066-sirloin.jpg', 'Thick, hearty, juicy steak cooked according to your liking', 300000, 0),
+(4, 'Spaghetti Carbonara', 2, 20, 'recipe-image-legacy-id--1001491_11.jpg', 'Creamy pasta cooked to al dente', 70000, 0),
+(5, 'Chocolate Lava Cake', 3, 20, 'IMG_6207-chocolate-molten-lava-cakes-recipe-square.jpg', 'Chocolate goodness that will melt in your mouth', 35000, 0),
+(6, 'Gelato Ice Cream', 3, 20, '76389-es-krim-neapolitan-shutterstock.jpg', 'Italian style ice cream (Chocolate, Strawberry, Vanilla flavor)', 35000, 0),
+(7, 'Seasoned Fries', 4, 20, 'frozenfrenchfries14.jpg', 'Seasoned with our specialty herbs and with your choice of dipping sauce', 40000, 0),
+(8, 'Lemonade', 5, 20, '2586d951-a46a-4091-aec6-eca3adefb409.jpg', 'Refreshing lemonade, perfect for summer!', 28000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foodcategory`
+--
+
+CREATE TABLE `foodcategory` (
+  `categoryID` int(3) NOT NULL,
+  `categoryName` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `foodcategory`
+--
+
+INSERT INTO `foodcategory` (`categoryID`, `categoryName`) VALUES
+(1, 'Appetizer'),
+(2, 'Main Course'),
+(3, 'Dessert'),
+(4, 'Snack'),
+(5, 'Beverage');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `paymentID` int(3) NOT NULL,
+  `payment` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`paymentID`, `payment`) VALUES
+(1, 'Cash'),
+(2, 'Debit'),
+(3, 'Credit');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `transID` int(3) NOT NULL,
+  `custID` int(3) NOT NULL,
+  `orderDate` date NOT NULL,
+  `paymentType` int(3) DEFAULT NULL,
+  `total` float NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `deliveryAddress` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-INSERT INTO `FoodCategory`(`categoryName`) VALUES ('Appetizer'), ('Main Course'), ('Dessert'), ('Snack'), ('Drink');
+-- --------------------------------------------------------
 
-INSERT INTO `Food` (`foodName`,`foodCategory`,`stock`, `photoLink`,`desc`,`price`)
-VALUES ( 'Mushroom Soup', '1', '20', 'Creamy-Garlic-Mushroom-Soup-spoon.jpg', 'Creamy mushroom soup that will warm your body', '40000'),
-('Chicken Soup', '1', '20', 'soup.jpg', 'Creamy and cheesy chicken soup that will warm your body', '40000'),
-('Tenderloin Steak', '2', '20', '045813900_1489071066-sirloin.jpg', 'Thick, hearty, juicy steak cooked according to your liking', '300000'),
-('Spaghetti Carbonara', '2', '20','recipe-image-legacy-id--1001491_11.jpg', 'Creamy pasta cooked to al dente','70000'),
-('Chocolate Lava Cake','3','20','IMG_6207-chocolate-molten-lava-cakes-recipe-square.jpg','Chocolate goodness that will melt in your mouth', '35000'),
-('Gelato Ice Cream','3', '20','76389-es-krim-neapolitan-shutterstock.jpg','Italian style ice cream (Chocolate, Strawberry, Vanilla flavor)','35000'),
-('Seasoned Fries','4','20','frozenfrenchfries14.jpg','Seasoned with our specialty herbs and with your choice of dipping sauce', '40000'),
-('Lemonade','5','20','2586d951-a46a-4091-aec6-eca3adefb409.jpg','Refreshing lemonade, perfect for summer!','28000')
+--
+-- Table structure for table `transactiondetail`
+--
+
+CREATE TABLE `transactiondetail` (
+  `transID` int(3) NOT NULL,
+  `foodID` int(3) NOT NULL,
+  `quantity` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `custID` int(3) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `displayName` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `birthDate` date NOT NULL,
+  `profileLink` varchar(255) DEFAULT 'default.png',
+  `role` varchar(30) NOT NULL DEFAULT 'user'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`custID`, `email`, `displayName`, `password`, `birthDate`, `profileLink`, `role`) VALUES
+(1, 'uwu@gmail.com', 'joy', '$2y$10$2no4qZ0IQk6K8DC80e7FhOGZwlroFdHnDEH518fuSQQ/2N/XBLrCK', '1999-12-15', 'default.png', 'user'),
+(2, 'admin@gmail.com', 'admin', '$2y$10$BBBJnSsYAuL3BUiE8zWl2uCu0ZkyQluq8HahuZpsB6YZGgbt3ZBGe', '2020-05-11', 'default.png', 'admin');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `food`
+--
+ALTER TABLE `food`
+  ADD PRIMARY KEY (`foodID`),
+  ADD KEY `Food_fk0` (`foodCategory`);
+
+--
+-- Indexes for table `foodcategory`
+--
+ALTER TABLE `foodcategory`
+  ADD PRIMARY KEY (`categoryID`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`paymentID`);
+
+--
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`transID`),
+  ADD KEY `Transaction_fk0` (`custID`),
+  ADD KEY `Transaction_fk1` (`paymentType`);
+
+--
+-- Indexes for table `transactiondetail`
+--
+ALTER TABLE `transactiondetail`
+  ADD KEY `Transaction Detail_fk0` (`transID`),
+  ADD KEY `Transaction Detail_fk1` (`foodID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`custID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `food`
+--
+ALTER TABLE `food`
+  MODIFY `foodID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `foodcategory`
+--
+ALTER TABLE `foodcategory`
+  MODIFY `categoryID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `transID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `custID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `food`
+--
+ALTER TABLE `food`
+  ADD CONSTRAINT `Food_fk0` FOREIGN KEY (`foodCategory`) REFERENCES `foodcategory` (`categoryID`);
+
+--
+-- Constraints for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD CONSTRAINT `Transaction_fk0` FOREIGN KEY (`custID`) REFERENCES `user` (`custID`),
+  ADD CONSTRAINT `Transaction_fk1` FOREIGN KEY (`paymentType`) REFERENCES `payment` (`paymentID`);
+
+--
+-- Constraints for table `transactiondetail`
+--
+ALTER TABLE `transactiondetail`
+  ADD CONSTRAINT `Transaction Detail_fk0` FOREIGN KEY (`transID`) REFERENCES `transaction` (`transID`),
+  ADD CONSTRAINT `Transaction Detail_fk1` FOREIGN KEY (`foodID`) REFERENCES `food` (`foodID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
