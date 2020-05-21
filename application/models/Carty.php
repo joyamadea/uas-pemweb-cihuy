@@ -53,4 +53,32 @@
         return $query->result();
     }
 
+    function payMethod(){
+        $query = $this->db->get('payment');
+        return $query->result();
+    }
+
+    function finishTrans($data){
+        $partitioned = array(
+            'orderDate'=>$data['date'],
+            'paymentType'=>$data['payment'],
+            'status'=>1,
+            'deliveryAddress'=>$data['delivAddress']
+        );
+        $this->db->where('transID',$data['transID']);
+        $this->db->update('transaction',$partitioned);
+        return true;
+    }
+
+    function decreaseStock($data){
+        $foodID = $data['foodID'];
+        $query = $this->db->query("SELECT `stock` FROM `food` WHERE `foodID`='$foodID'");
+        $stock = $query->result()[0]->stock;
+        $stock = (int)$stock - (int)$data['quantity'];
+        $array = array('stock'=>$stock);
+        $this->db->where('foodID',$foodID);
+        $this->db->update('food',$array);
+        return true;
+    }
+
   }

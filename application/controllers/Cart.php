@@ -14,10 +14,13 @@
         $data['style'] = $this->load->view('include/style',NULL,TRUE);
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
         $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
-        $transID = $this->carty->getTransId()[0]->transID;
-        $data['total'] = $this->carty->getTransId()[0]->total;
-        $data['food'] = $this->menu->getFood();
-        $data['cart'] = $this->carty->getItems($transID);
+        if($this->carty->getTransId()){
+            $transID = $this->carty->getTransId()[0]->transID;
+            $data['total'] = $this->carty->getTransId()[0]->total;
+            $data['food'] = $this->menu->getFood();
+            $data['cart'] = $this->carty->getItems($transID);
+        }
+        
 
 		$this->load->view('pages/shopping_cart.php', $data);
      }
@@ -61,7 +64,41 @@
      }
 
      public function check_out(){
+        $data['style'] = $this->load->view('include/style',NULL,TRUE);
+		$data['script'] = $this->load->view('include/script',NULL,TRUE);
+        $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
+        $transID = $this->carty->getTransId()[0]->transID;
+        $data['total'] = $this->carty->getTransId()[0]->total;
+        $data['food'] = $this->menu->getFood();
+        $data['cart'] = $this->carty->getItems($transID);
+        $data['payment'] = $this->carty->payMethod();
 
-        $this->load->view('pages/check_out.php');
+        $this->load->view('pages/check_out.php',$data);
+     }
+
+     public function endTrans(){
+         $this->form_validation->set_rules('delivAddress','Delivery Address','required');
+         $this->form_validation->set_rules('metode','Payment Method','required');
+         $format = "%Y-%m-%d";
+         $data['date'] = mdate($format);
+
+         if($this->form_validation->run() == FALSE){
+             $this->session->set_flashdata('checkoutFail',validation_errors());
+             redirect(site_url('cart/check_out'));
+         }
+         else{
+            $data['transID'] = $this->carty->getTransId()[0]->transID;
+            $data['delivAddress'] = $this->input->post('delivAddress');
+            $data['payment'] = $this->input->post('metode');
+            $this->carty->finishTrans($data);
+            $cart = $this->carty->getItems($data['transID']);
+            foreach($cart as $c){
+                $partitioned['quantity'] = $c->quantity;
+                $partitioned['foodID'] = $c->foodID;
+                $partitioned['transID'] = $c->transID;
+                $this->carty->decreaseStock($partitioned);
+            }
+            $this->load->view('pages/delivering.php');
+         }
      }
  }

@@ -17,26 +17,32 @@
     <?php echo $navbar; ?>
     
     <div class="container">
+        
         <h3 style="color:black;margin-bottom:3%;">Shopping Cart</h3>
 
         
-        <div class="row">
+            
         
+        <div class="row">
+        <?php if(!$this->carty->getTransId()){ ?>
+            <div class="col">
+                It looks lonely here...
+            </div>
+
+            <?php }else{ ?>
             <div class="col-lg-8 col-12">
             <?php foreach($cart as $c){?>
             <div class="row">
             <div class="col">
             <div class="card mb-3">   
                 <div class="card-body">
-                    <h5 class="card-title text-dark">
+                    <p class="card-title text-dark" style="font-weight:bold;">
                     <?php
                         foreach($food as $f){
                             if($f->foodID == $c->foodID){
                                 echo $f->foodName;
-                            
-                        
                     ?>
-                    </h5>
+                    </p>
                 
                     Rp. <?php echo number_format($f->price,0,',','.'); ?>
                     <?php echo $c->quantity; ?>
@@ -50,6 +56,7 @@
             <?php } ?>
         </div>
         
+        <!-- Order Summary -->
         <div class="col-lg-4 col-12">
             <div class="card">
                 <div class="card-body">
@@ -61,6 +68,7 @@
             </div>
         </div>
         </div>
+        <?php } ?>
     </div>
        
                             
