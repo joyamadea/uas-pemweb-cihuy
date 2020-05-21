@@ -63,7 +63,7 @@ INSERT INTO `food` (`foodID`, `foodName`, `foodCategory`, `stock`, `photoLink`, 
 (17, 'Lemonade', 4, 20, '2586d951-a46a-4091-aec6-eca3adefb409.jpg', 'Refreshing lemonade, perfect for summer!', 28000, 0),
 (18, 'Americano', 4, 15, 'hot-americano.jpg', 'Hot/Cold version available', 25000,0),
 (19, 'Cappuccino', 4, 20, '1280px-Cappuccino.jpg', 'Hot/Cold version available', 35000,0),
-(20, 'Oreo Shake', 4, 25, 'oreoshake.jpg', 'Blended oreo milkshake. Sweet and rich', 40000,0 ),
+(20, 'Oreo Shake', 4, 25, 'oreoshake.png', 'Blended oreo milkshake. Sweet and rich', 40000,0 ),
 (21, 'Lemon Tea', 4, 20, 'freshlemontea.jpg','Fresh lemon tea. Hot/Cold available', 30000, 0);
 -- --------------------------------------------------------
 
