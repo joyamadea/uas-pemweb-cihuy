@@ -43,8 +43,19 @@
         }
     }
 
+    function getTransactions(){
+        $id = $this->session->userdata('id');
+        $query = $this->db->get_where('transaction',array('custID'=>$id,'status'=>1));
+        return $query->result();
+    }
+
     function getItems($id){
         $query = $this->db->get_where('transactionDetail',array('transID'=>$id));
+        return $query->result();
+    }
+
+    function getDetailItems(){
+        $query = $this->db->get('transactionDetail');
         return $query->result();
     }
 
