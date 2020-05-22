@@ -48,15 +48,16 @@
         </div>
     </li>
 
+    
+
+  <!-- Nav Item - User Information -->
+  <?php if($this->session->userdata('name') != FALSE) {?>
     <li class="nav-item ">
         <a class="nav-link" href="<?php echo site_url('cart'); ?>" id="searchDropdown" role="button" >
         <i class="fas fa-shopping-cart"></i>
         <!-- <span class="badge badge-danger badge-counter">3+</span> -->
         </a>
     </li>
-
-  <!-- Nav Item - User Information -->
-  <?php if($this->session->userdata('name') != FALSE) {?>
 
     <li class="nav-item dropdown no-arrow">
     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

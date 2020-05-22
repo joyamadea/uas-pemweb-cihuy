@@ -26,7 +26,9 @@
         <div class="row">
         <?php if(!$this->carty->getTransId()){ ?>
             <div class="col">
-                It looks lonely here...
+                <img src="assets/lonely.jpg" style="width:40%;">
+                <span style="font-size:20px;">It looks lonely here...</span><br>
+                <a class="btn btn-primary btn-block" href="<?php echo base_url(); ?>">Let's order some food!</a>
             </div>
 
             <?php }else{ ?>

@@ -23,7 +23,12 @@ class Menu extends CI_Model{
 	}
 
 	public function getFood(){
-		$query = $this->db->query("SELECT foodID, foodName, price FROM `food`");
+		$query = $this->db->query("SELECT foodID, foodName, price, photoLink FROM `food`");
+		return $query->result();
+	}
+
+	public function getProdRating($id){
+		$query = $this->db->query("SELECT COUNT(rated) AS counted FROM `transactionDetail` WHERE `foodID`='$id'");
 		return $query->result();
 	}
 

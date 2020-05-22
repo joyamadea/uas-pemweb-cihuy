@@ -32,11 +32,6 @@
         return true;
     }
 
-    function dummy(){
-        $query = $this->db->query('SELECT LAST_INSERT_ID() AS last_id');
-        return $query->result();
-    }
-
     function getTransId(){
         $sesh = $this->session->userdata('id');
         $query = $this->db->query("SELECT transID, total FROM `transaction` WHERE `custID`='$sesh' AND `status`=0");
@@ -78,6 +73,23 @@
         $array = array('stock'=>$stock);
         $this->db->where('foodID',$foodID);
         $this->db->update('food',$array);
+        return true;
+    }
+
+    function rateFood($data){
+        $this->db->where(array('foodID'=>$data['foodID'],'transID'=>$data['transId']));
+        $this->db->update('transactionDetail',array('rated'=>$data['rating']));
+        $foodID = $data['foodID'];
+        $transID = $data['transId'];
+
+
+        $query = $this->db->query("SELECT COUNT(*) AS counted, SUM(`rated`) AS total FROM `transactionDetail` WHERE `foodID`='$foodID' AND `rated` IS NOT NULL");
+        $counted = $query->result()[0]->counted;
+        $total = $query->result()[0]->total;
+
+        $avg = (int)$total / (int)$counted;
+        $this->db->where('foodID',$foodID);
+        $this->db->update('food',array('rating'=>$avg));
         return true;
     }
 

@@ -65,7 +65,7 @@
         </div>
         
         <div class="col-lg-4 col-12">
-            <div class="card">
+            <div class="card mb-5">
                 <div class="card-body">
                     <h5 class="card-title text-dark" style="font-weight:bold;">Order Summary</h5>
                     <hr>

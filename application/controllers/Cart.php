@@ -67,13 +67,19 @@
         $data['style'] = $this->load->view('include/style',NULL,TRUE);
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
         $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
-        $transID = $this->carty->getTransId()[0]->transID;
-        $data['total'] = $this->carty->getTransId()[0]->total;
-        $data['food'] = $this->menu->getFood();
-        $data['cart'] = $this->carty->getItems($transID);
-        $data['payment'] = $this->carty->payMethod();
-
-        $this->load->view('pages/check_out.php',$data);
+        if($this->carty->getTransId()){
+            $transID = $this->carty->getTransId()[0]->transID;
+            $data['total'] = $this->carty->getTransId()[0]->total;
+            $data['food'] = $this->menu->getFood();
+            $data['cart'] = $this->carty->getItems($transID);
+            $data['payment'] = $this->carty->payMethod();
+    
+            $this->load->view('pages/check_out.php',$data);
+        }
+        else{
+            redirect(site_url('cart'));
+        }
+       
      }
 
      public function endTrans(){
@@ -98,7 +104,9 @@
                 $partitioned['transID'] = $c->transID;
                 $this->carty->decreaseStock($partitioned);
             }
-            $this->load->view('pages/delivering.php');
+            $this->session->set_userdata('transID',$data['transID']);
+            redirect(site_url('rating'));
          }
      }
+
  }

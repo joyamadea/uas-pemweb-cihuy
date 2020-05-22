@@ -43,26 +43,26 @@
                 <h3 style="color:black;font-weight:500;"><?php echo $d->foodName; ?></h3>
 
                 <!-- Rating -->
-                <p>
                 <?php 
                     if($d->rating == 0){
                         echo "Unrated";
-                    }else{
-                        for($i=0;$i<5;$i++){
-                            echo '<i class="fas fa-star"></i>';
-                        }
-                    }
-                    // for($i=0;$i<5;$i++){
-                    //             echo '<i class="fas fa-star" style="color:#FFD300;"></i>';
-                    //         }
-                    
-                ?>
-                
-                </p>
+                    }else{?>
+                       
+                        <div id="dataReadonlyReview"
+                            data-rating-stars="5"
+                            data-rating-readonly="true"
+                            data-rating-value="<?php echo $d->rating; ?>"
+                            data-rating-input="#dataReadonlyInput"
+                            style="float:left;margin-right:7px;">
+                            
+                        </div>
+                        (<?php echo $rating; ?>)
+                   <?php } ?>
+                   
                 <hr>
                 
                 <!-- Price -->
-                <p>Rp. <?php echo $d->price; ?></p>
+                <p>Rp. <?php echo number_format($d->price,0,',','.'); ?></p>
                 <!-- Button for adding and subtracting quantity of product -->
                 <?php echo form_open('cart/add'); ?>
                 <div class="input-group">
@@ -159,6 +159,7 @@
             }    
         }
     </script>
+
     <?php echo $script; ?>
 </body>
 </html>

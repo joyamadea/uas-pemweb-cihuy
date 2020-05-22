@@ -11,6 +11,7 @@ class Restaurant extends CI_Controller {
 
 	public function index()
 	{
+		$this->session->unset_userdata('transID');
 		
 		$data['style'] = $this->load->view('include/style',NULL,TRUE);
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
@@ -71,6 +72,7 @@ class Restaurant extends CI_Controller {
 		$data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
 		$id = $this->uri->segment(3);
 		$data['details'] = $this->menu->detail_prod($id);
+		$data['rating'] = $this->menu->getProdRating($id)[0]->counted;
 		
         
         $this->load->view('pages/product.php', $data);
