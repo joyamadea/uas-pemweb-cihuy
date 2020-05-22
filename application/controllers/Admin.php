@@ -32,7 +32,7 @@ class Admin extends CI_Controller {
         }
         
         
-        $this->load->view('pages/admin.php', $data);
+        $this->load->view('admin/admin.php', $data);
     }
 
     public function statistics(){
@@ -42,7 +42,7 @@ class Admin extends CI_Controller {
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
         $data['trans'] = $this->stats->daily_data();
         
-        $this->load->view('pages/statistics.php', $data);
+        $this->load->view('admin/statistics.php', $data);
     }
 
     public function food(){
@@ -54,7 +54,7 @@ class Admin extends CI_Controller {
         $data['output'] = $this->setup->show_data();
         $data['cat'] = $this->setup->category();
         // echo var_dump($data['output']);
-        $this->load->view('pages/food.php',(array)$data);
+        $this->load->view('admin/food.php',(array)$data);
     }
 
     public function food_category(){
@@ -65,7 +65,7 @@ class Admin extends CI_Controller {
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
         $data['output'] = $this->setup->category();
         // echo var_dump($data['output']);
-        $this->load->view('pages/food_category.php',(array)$data);
+        $this->load->view('admin/food_category.php',(array)$data);
     }
 
     public function users(){
@@ -76,7 +76,7 @@ class Admin extends CI_Controller {
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
         $data['output'] = $this->setup->user();
         // echo var_dump($data['output']);
-        $this->load->view('pages/users.php',(array)$data);
+        $this->load->view('admin/users.php',(array)$data);
     }
 
     public function add(){
