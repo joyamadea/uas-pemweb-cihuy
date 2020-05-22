@@ -132,7 +132,8 @@ CREATE TABLE `transaction` (
 CREATE TABLE `transactiondetail` (
   `transID` int(3) NOT NULL,
   `foodID` int(3) NOT NULL,
-  `quantity` int(5) NOT NULL
+  `quantity` int(5) NOT NULL,
+  `rated` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
