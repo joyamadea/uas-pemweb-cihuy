@@ -36,7 +36,7 @@
       <?php echo form_close();?>
  
       <p>
-           Kembali ke beranda, Silakan klik <?php echo anchor(site_url().'/first_page','di sini..'); ?>
+           Kembali ke beranda, Silakan klik <?php echo anchor(site_url(),'di sini..'); ?>
       </p>
  </body>
  </html>
