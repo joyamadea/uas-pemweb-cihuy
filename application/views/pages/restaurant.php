@@ -63,7 +63,7 @@
         <?php 
             if(!empty($food)){ 
                 if(!empty($_SESSION['search'])){?>
-                <h4> Result found for <?php echo $_SESSION['search']; unset($_SESSION['search']);}?></h4>
+                <h4> Result found for '<?php echo $_SESSION['search']; unset($_SESSION['search']);}?>'</h4>
                 <div class="card-columns">
                 <?php foreach($food as $f){ 
                     ?>        
@@ -79,7 +79,8 @@
                         </a>
                     <?php }
                     }
-            else {?><h4> Result not found for <?php echo $_SESSION['search']; unset($_SESSION['search']);?></h4><?php } ?>
+            else if(!empty($_SESSION['search'])){?><h4> Result not found for '<?php echo $_SESSION['search']; unset($_SESSION['search']);?>'</h4><?php }
+            else {?><h4> Menu does not exist</h4> <?php } ?>
         </div>
     </div>
 
