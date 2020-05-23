@@ -28,7 +28,7 @@
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Total Earnings</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Daily Earning</h6>
                                 </div>
                                 <div class="card-body">
                                 <div class="chart-area">
@@ -63,9 +63,8 @@
             labels: [
             <?php
                 foreach ($trans as $f) {
-                    echo "'" .$f->orderDate ."',";
-                }
-                
+                    echo "'" .date("d/m/y",strtotime($f->orderDate))."',";
+                }   
             ?>
             ],
             datasets: [{
@@ -77,7 +76,6 @@
                     foreach ($trans as $f) {
                         echo $f->total . ", ";
                     }
-                    
                 ?>
                 ]
             }]
@@ -86,7 +84,7 @@
             maintainAspectRatio: false,
             elements: {
                 line: {
-                    tension: 0
+                    tension: 0.2
                 }
             },
             legend: {

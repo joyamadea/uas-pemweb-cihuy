@@ -59,7 +59,7 @@
                     </p>
                                 
                     
-                            Rp. <?php echo number_format($f->price,0,',','.'); ?>
+                            Rp <?php echo number_format($f->price,0,',','.'); ?>
                             <?php echo $c->quantity; ?>x
                         </div>
                         <div class="col text-right">
@@ -84,7 +84,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-dark" style="font-weight:bold;">Order Summary</h5>
                     <hr>
-                    <p class="card-text" style="justify-content:space-between;">Total <span class="ml-auto" style="font-weight:bold;text-align:right;">Rp. <?php echo number_format($total,0,',','.');?></span></p>
+                    <p class="card-text" style="justify-content:space-between;">Total <span class="ml-auto" style="font-weight:bold;text-align:right;">Rp <?php echo number_format($total,0,',','.');?></span></p>
                     <a href="<?php echo site_url('cart/check_out'); ?>" class="btn btn-primary btn-block">Check Out</a>
                 </div>
             </div>

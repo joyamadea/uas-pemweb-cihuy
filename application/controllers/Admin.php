@@ -8,7 +8,7 @@ class Admin extends CI_Controller {
 		parent::__construct();
 
 		$this->load->database();
-        $this->load->helper(array('url','form'));
+        $this->load->helper(array('url','form','date'));
         $this->load->model(array('setup','stats'));
 
 		$this->load->library('form_validation');
@@ -21,16 +21,11 @@ class Admin extends CI_Controller {
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
         
-        $number = $this->stats->sum();
-        foreach($number as $n){
-            $data['total'] = $n->total;
-        }
-
-        $users = $this->stats->users();
-        foreach($users as $u){
-            $data['users'] = $u->total;
-        }
-        
+        $data['total'] =  $this->stats->sum()[0]->total;
+        $data['users'] = $this->stats->users()[0]->total;
+        $thisMonth = mdate("%m");
+        $data['monthly'] = $this->stats->monthlySales($thisMonth)[0]->total;;
+        $data['rating'] = $this->stats->overallRating();
         
         $this->load->view('admin/admin.php', $data);
     }
@@ -40,7 +35,8 @@ class Admin extends CI_Controller {
         $data['script'] = $this->load->view('include/script',NULL,TRUE);
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
-        $data['trans'] = $this->stats->daily_data();
+        $thisMonth = mdate("%m");
+        $data['trans'] = $this->stats->daily_data($thisMonth);
         
         $this->load->view('admin/statistics.php', $data);
     }

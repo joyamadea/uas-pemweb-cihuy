@@ -53,8 +53,8 @@
                     ?>
                     </p>
                 
-                    Rp. <?php echo number_format($f->price,0,',','.'); ?>
-                    <?php echo $c->quantity; ?>
+                    Rp <?php echo number_format($f->price,0,',','.'); ?>
+                    <?php echo $c->quantity; ?>x
                     
                 </div>
                 <?php } }?>
@@ -69,7 +69,7 @@
                 <div class="card-body">
                     <h5 class="card-title text-dark" style="font-weight:bold;">Order Summary</h5>
                     <hr>
-                    <p class="card-text" style="justify-content:space-between;">Total <span class="ml-auto" style="font-weight:bold;text-align:right;">Rp. <?php echo number_format($total,0,',','.');?></span></p>
+                    <p class="card-text" style="justify-content:space-between;">Total <span class="ml-auto" style="font-weight:bold;text-align:right;">Rp <?php echo number_format($total,0,',','.');?></span></p>
                     
                     <div class="form-group">
                         <label for="metode">Payment Method:</label>

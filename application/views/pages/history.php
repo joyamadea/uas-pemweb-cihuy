@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col">
                                 <?php echo $f->foodName; ?><br>
-                                Rp. <?php echo number_format($f->price,0,',','.'); ?>
+                                Rp <?php echo number_format($f->price,0,',','.'); ?>
                                 <?php echo $d->quantity; ?>x
                                 
                             
@@ -34,7 +34,7 @@
                                 
                                 
                                 Total Product Price<br>
-                                Rp. <?php echo number_format((int)$f->price*(int)$d->quantity,0,',','.');?>
+                                Rp <?php echo number_format((int)$f->price*(int)$d->quantity,0,',','.');?>
                             </div>
                         </div>
                         <hr>
@@ -44,7 +44,7 @@
                     <?php } ?>
                     <?php } ?>
                     <?php } ?>
-                    Total Price Rp. <?php echo number_format($t->total,0,',','.'); ?>
+                    Total Price Rp <?php echo number_format($t->total,0,',','.'); ?>
                                 
                 </div>
             </div>

@@ -62,7 +62,7 @@
                 <hr>
                 
                 <!-- Price -->
-                <p>Rp. <?php echo number_format($d->price,0,',','.'); ?></p>
+                <p>Rp <?php echo number_format($d->price,0,',','.'); ?></p>
                 <!-- Button for adding and subtracting quantity of product -->
                 <?php echo form_open('cart/add'); ?>
                 <div class="input-group">
@@ -88,7 +88,7 @@
                 <i><p class="mt-3"><?php echo $d->desc; ?></p></i>
 
                 <!-- Add to cart -->
-                <input type="submit" class="btn btn-primary" name="addtocart" value="Add to Cart">
+                <input type="submit" class="btn btn-primary" name="addtocart" value="Add to Cart" <?php if($d->stock == 0) echo "disabled";?>>
                 <?php echo form_close();?>
 
             </div>
@@ -100,12 +100,12 @@
     </div>
     <script>
         
-        var val=1;
+        var val=0;
 
         function up(){
             var actVal=document.getElementById("productValue").value;
             var maxNumProd=document.getElementById("maxNumProd").value;
-            if(actVal == "1" || actVal == val){
+            if(actVal == "0" || actVal == val){
                 val++;
                 if(val > maxNumProd){
                     document.getElementById("productValue").value=maxNumProd;
@@ -133,11 +133,11 @@
 
         function down(){
             var actVal=document.getElementById("productValue").value;
-            if(actVal == "1" || actVal == val){
+            if(actVal == "0" || actVal == val){
                 val--;
-                if(val < 1){
-                    document.getElementById("productValue").value=1;
-                    val=1;
+                if(val < 0){
+                    document.getElementById("productValue").value=0;
+                    val=0;
                 }
                 else{
                     document.getElementById("productValue").value=val;
@@ -147,9 +147,9 @@
             else{
                 var hi=document.getElementById("productValue").value;
                 hi--;
-                if(hi < 1){
+                if(hi < 0){
                     document.getElementById("productValue").value=1;
-                    hi=1;
+                    hi=0;
                 }
                 else{
                     document.getElementById("productValue").value=hi;

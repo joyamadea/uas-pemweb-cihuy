@@ -39,9 +39,9 @@
                             <option value="<?php echo $row->categoryID; ?>" <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == $row->categoryID) echo "selected";?>><?php echo $row->categoryName;?></option>';
                         <?php }?>
                     ?>
-                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '<50000') echo "selected";?> value="<50000">Under Rp. 50.000</option>
-                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '<150000') echo "selected";?> value="<150000">Under Rp. 150.000</option>
-                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '>250000') echo "selected";?> value=">250000">Above Rp. 250.000</option>
+                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '<50000') echo "selected";?> value="<50000">Under Rp 50.000</option>
+                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '<150000') echo "selected";?> value="<150000">Under Rp 150.000</option>
+                    <option <?php if (!empty($this->input->post('fieldFilter')) && $this->input->post('fieldFilter') == '>250000') echo "selected";?> value=">250000">Above Rp 250.000</option>
                 </select>
             </form>
 
@@ -73,7 +73,7 @@
                             <div class="body m-3">
                                 <p class="card-title"><b><?php echo $f->foodName ?></b></p>
                                 <p class="card-text"><?php echo $f->desc ?></p>
-                                <p class="card-text"><?php echo 'Rp. '.number_format($f->price,0,',','.') ?></p>
+                                <p class="card-text"><?php echo 'Rp '.number_format($f->price,0,',','.') ?></p>
                             </div>
                         </div>
                         </a>

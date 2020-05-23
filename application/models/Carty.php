@@ -45,7 +45,8 @@
 
     function getTransactions(){
         $id = $this->session->userdata('id');
-        $query = $this->db->get_where('transaction',array('custID'=>$id,'status'=>1));
+        $this->db->order_by('orderDate','desc');
+        $query =  $this->db->get_where('transaction',array('custID'=>$id,'status'=>1));
         return $query->result();
     }
 
