@@ -63,7 +63,7 @@
         <?php 
             if(!empty($food)){ 
                 if(!empty($_SESSION['search'])){?>
-                <h4> Result found for '<?php echo $_SESSION['search']; unset($_SESSION['search']);}?>'</h4>
+                <h4> Result found for '<?php echo $_SESSION['search']."'"; unset($_SESSION['search']);}?></h4>
                 <div class="card-columns">
                 <?php foreach($food as $f){ 
                     ?>        
