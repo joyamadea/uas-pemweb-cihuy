@@ -87,6 +87,39 @@
         return true;
     }
 
+    function checkRow($id){
+        $query = $this->db->get_where('transactionDetail',array('transID'=>$id));
+        return $query->num_rows();
+    }
+
+    function deleteItem($data){
+        $query = $this->db->get_where('transactionDetail',$data);
+        $quant = $query->result()[0]->quantity;
+        $foodID = $data['foodID'];
+        $query2 = $this->db->query("SELECT `price` FROM `food` WHERE `foodID`='$foodID'");
+        $price = $query2->result()[0]->price;
+
+        $subtracted= (int)$quant * (int)$price;
+        $trans = array('transID'=>$data['transID']);
+        $query3 = $this->db->get_where('transaction',$trans);
+
+        $prevTotal = $query3->result()[0]->total;
+        $curTotal = (int)$prevTotal - (int)$subtracted;
+
+        $thingy2 = array('transID'=>$data['transID'],'foodID'=>$data['foodID']);
+        $this->db->where($trans);
+        $this->db->update('transaction',array('total'=>$curTotal));
+
+        $this->db->where($data);
+        $this->db->delete('transactionDetail');
+
+    }
+
+    function deleteTrans($id){
+        $this->db->where(array('transID'=>$id));
+        $this->db->delete('transaction');
+    }
+
     function rateFood($data){
         $this->db->where(array('foodID'=>$data['foodID'],'transID'=>$data['transId']));
         $this->db->update('transactionDetail',array('rated'=>$data['rating']));

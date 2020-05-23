@@ -82,6 +82,25 @@
        
      }
 
+     public function deleteItem(){
+         if($this->carty->getTransId()){
+            $transID = $this->carty->getTransId()[0]->transID;
+            $id=$this->uri->segment(3);
+            $data = array('transID'=>$transID,'foodID'=>$id);
+            if($this->carty->checkRow($transID)>1){
+                $this->carty->deleteItem($data);
+            }
+            else{
+                $this->carty->deleteItem($data);
+                $this->carty->deleteTrans($transID);
+            }
+            
+            
+            $this->session->set_flashdata('delItem','Item Deleted from Cart');
+            redirect(site_url('cart'));
+         }
+     }
+
      public function endTrans(){
          $this->form_validation->set_rules('delivAddress','Delivery Address','required');
          $this->form_validation->set_rules('metode','Payment Method','required');

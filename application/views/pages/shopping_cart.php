@@ -22,8 +22,14 @@
 
         
             
-        
+        <?php if($this->session->flashdata('delItem')){?>
+        <div class="alert alert-danger mt-3" role="alert">
+            <?php echo $this->session->flashdata('delItem'); ?>
+        </div>
+        <?php } ?>
+
         <div class="row">
+        
         <?php if(!$this->carty->getTransId()){ ?>
             <div class="col">
                 <img src="assets/lonely.jpg" style="width:40%;">
@@ -32,12 +38,18 @@
             </div>
 
             <?php }else{ ?>
+                
             <div class="col-lg-8 col-12">
             <?php foreach($cart as $c){?>
             <div class="row">
+            
+        
+        
             <div class="col">
             <div class="card mb-3">   
                 <div class="card-body">
+                <div class="row align-items-center">
+                        <div class="col">
                     <p class="card-title text-dark" style="font-weight:bold;">
                     <?php
                         foreach($food as $f){
@@ -45,10 +57,18 @@
                                 echo $f->foodName;
                     ?>
                     </p>
-                
-                    Rp. <?php echo number_format($f->price,0,',','.'); ?>
-                    <?php echo $c->quantity; ?>
-                    <a href="" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                
+                    
+                            Rp. <?php echo number_format($f->price,0,',','.'); ?>
+                            <?php echo $c->quantity; ?>x
+                        </div>
+                        <div class="col text-right">
+                            <a href="<?php echo site_url('cart/deleteitem/').$c->foodID; ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+
+                    
+                    
                     
                 </div>
                 <?php } }?>
