@@ -3,8 +3,7 @@
  
   class M_account extends CI_Model{
 
-       function daftar($data)
-       {
+       function daftar($data){
             $this->db->insert('user',$data);
        }
 
@@ -19,5 +18,11 @@
                return false;
          }
           
+       }
+
+       function profile($data){
+          $this->db->where('custID', $data['id']);
+		$this->db->update('user', array('profileLink' => $data['profileLink']));
+		return true;
        }
   }
