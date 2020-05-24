@@ -70,7 +70,7 @@
         <i class="fas fa-history mr-2 text-gray-400"></i>
         Transaction History
       </a>
-      <a class="dropdown-item" href="#">
+      <a class="dropdown-item" href="<?php echo site_url('profile'); ?>">
         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
         Profile
       </a>
