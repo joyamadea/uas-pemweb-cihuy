@@ -13,16 +13,19 @@ class Profile extends CI_Controller {
 	{		
 		$data['style'] = $this->load->view('include/style',NULL,TRUE);
 		$data['script'] = $this->load->view('include/script',NULL,TRUE);
-        $data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
+		$data['navbar'] = $this->load->view('templates/navbar',NULL,TRUE);
+		$email = $this->session->userdata('email');
+		$data['self'] = $this->m_account->login($email)[0];
 
 		$this->load->view('account/profile.php', $data);
 	}
 
-	public function editprofile()
+	public function editPic()
 	{
 		$config['upload_path']  = './assets/uploads/profile';
         $config['allowed_types'] = 'jpg|png';
-        $config['overwrite'] = true;
+		$config['overwrite'] = true;
+		
 
 		$this->load->library('upload', $config);
 		
@@ -36,10 +39,22 @@ class Profile extends CI_Controller {
 			$data['id'] = $this->session->userdata('id');
 			$data['profileLink'] = $this->upload->data()['file_name'];
 
-			//$data['profileLink'] = $this->upload->data();
-			echo var_dump($data['profileLink']);
+			$this->session->set_userdata('pic',$data['profileLink']);
+
 			$this->m_account->profile($data);
-			//redirect(site_url('profile'));
+			$this->session->set_flashdata('change','Successfully changed profile picture');
+			redirect(site_url('profile'));
 		}
+	}
+
+	public function editName(){
+		$data['name'] = $this->input->post('name');
+		$data['id'] = $this->session->userdata('id');
+
+		$this->m_account->name($data);
+		$this->session->set_userdata('name',$data['name']);
+
+		$this->session->set_flashdata('change','Successfully changed display name');
+		redirect(site_url('profile'));
 	}
 }

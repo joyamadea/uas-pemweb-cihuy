@@ -25,4 +25,10 @@
 		$this->db->update('user', array('profileLink' => $data['profileLink']));
 		return true;
        }
+
+       function name($data){
+          $this->db->where('custID', $data['id']);
+		$this->db->update('user', array('displayName' => $data['name']));
+		return true;
+       }
   }
