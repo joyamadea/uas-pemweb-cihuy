@@ -39,7 +39,7 @@
                         Birth Date
                     </div>
                     <div class="col">
-                    <?php echo date("d M Y", strtotime($self->displayName)); ?>
+                    <?php echo date("d M Y", strtotime($self->birthDate)); ?>
                     </div>
                 </div>
                 <div class="row mb-3">
