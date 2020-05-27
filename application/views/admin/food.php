@@ -66,13 +66,13 @@
                                     echo "<td>".$o->stock."</td>";
                                     echo "<td><img style='height:100px;' src='".site_url('assets/uploads/files/').$o->photoLink."'</td>";
                                     echo "<td>".$o->desc."</td>";
-                                    echo "<td>".$o->price."</td>";
+                                    echo "<td>Rp ".number_format($o->price,0,',','.')."</td>";
                                     echo "<td>";
                                         echo "<a href='".site_url('admin/edit/food/'.$o->foodID)."' class='btn btn-info btn-block mr-3'>";
                                         echo "<i class='fas fa-pencil-alt'></i>";
                                         echo "</a>";
 
-                                        echo "<a href='#' class='btn btn-danger btn-block'>";
+                                        echo "<a href='".site_url('admin/delete/food/'.$o->foodID)."' class='btn btn-danger btn-block'>";
                                         echo "<i class='fas fa-trash'></i>";
                                         echo "</a>";
                                     echo "</td>";

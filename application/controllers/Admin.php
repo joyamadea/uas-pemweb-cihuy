@@ -21,13 +21,19 @@ class Admin extends CI_Controller {
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
         
-        $data['total'] =  $this->stats->sum()[0]->total;
-        $data['users'] = $this->stats->users()[0]->total;
-        $thisMonth = mdate("%m");
-        $data['monthly'] = $this->stats->monthlySales($thisMonth)[0]->total;;
-        $data['rating'] = $this->stats->overallRating();
+        if(!$this->session->userdata('name')){
+            redirect(base_url());
+        }
+        else{
+            $data['total'] =  $this->stats->sum()[0]->total;
+            $data['users'] = $this->stats->users()[0]->total;
+            $thisMonth = mdate("%m");
+            $data['monthly'] = $this->stats->monthlySales($thisMonth)[0]->total;;
+            $data['rating'] = $this->stats->overallRating();
+            
+            $this->load->view('admin/admin.php', $data);
+        }
         
-        $this->load->view('admin/admin.php', $data);
     }
 
     public function statistics(){
@@ -35,10 +41,18 @@ class Admin extends CI_Controller {
         $data['script'] = $this->load->view('include/script',NULL,TRUE);
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
-        $thisMonth = mdate("%m");
-        $data['trans'] = $this->stats->daily_data($thisMonth);
         
-        $this->load->view('admin/statistics.php', $data);
+        if(!$this->session->userdata('name')){
+            redirect(base_url());
+        }
+        else{
+            $thisMonth = mdate("%m");
+            $data['trans'] = $this->stats->daily_data($thisMonth);
+            
+            $this->load->view('admin/statistics.php', $data);
+        }
+        
+        
     }
 
     public function food(){
@@ -47,10 +61,17 @@ class Admin extends CI_Controller {
         
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
-        $data['output'] = $this->setup->show_data();
-        $data['cat'] = $this->setup->category();
-        // echo var_dump($data['output']);
-        $this->load->view('admin/food.php',(array)$data);
+
+        if(!$this->session->userdata('name')){
+            redirect(base_url());
+        }
+        else{
+            $data['output'] = $this->setup->show_data();
+            $data['cat'] = $this->setup->category();
+            // echo var_dump($data['output']);
+            $this->load->view('admin/food.php',(array)$data);
+        }
+       
     }
 
     public function food_category(){
@@ -59,9 +80,16 @@ class Admin extends CI_Controller {
         
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
-        $data['output'] = $this->setup->category();
-        // echo var_dump($data['output']);
-        $this->load->view('admin/food_category.php',(array)$data);
+
+        if(!$this->session->userdata('name')){
+            redirect(base_url());
+        }
+        else{
+            $data['output'] = $this->setup->category();
+            // echo var_dump($data['output']);
+            $this->load->view('admin/food_category.php',(array)$data);
+        }
+       
     }
 
     public function users(){
@@ -70,9 +98,16 @@ class Admin extends CI_Controller {
         
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
-        $data['output'] = $this->setup->user();
-        // echo var_dump($data['output']);
-        $this->load->view('admin/users.php',(array)$data);
+
+        if(!$this->session->userdata('name')){
+            redirect(base_url());
+        }
+        else{
+            $data['output'] = $this->setup->user();
+            // echo var_dump($data['output']);
+            $this->load->view('admin/users.php',(array)$data);
+        }
+        
     }
 
     public function add(){
@@ -81,10 +116,17 @@ class Admin extends CI_Controller {
         
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
-        $data['table'] = $this->uri->segment(3);
-        $data['cat'] = $this->setup->category();
 
-        $this->load->view('crud/add.php',$data);
+        if(!$this->session->userdata('name')){
+            redirect(base_url());
+        }
+        else{
+            $data['table'] = $this->uri->segment(3);
+            $data['cat'] = $this->setup->category();
+    
+            $this->load->view('crud/add.php',$data);
+        }
+       
     }
 
     public function addFood(){
@@ -222,6 +264,14 @@ class Admin extends CI_Controller {
         $this->load->view('crud/edit.php',$data);
     }
 
+    public function delete(){
+        $data['id'] = $this->uri->segment(4);
+        $data['table'] = $this->uri->segment(3);
+
+        $this->setup->delete($data);
+        redirect(site_url('admin/').$data['table']);
+    }
+
 
     public function editFood(){
         $link = $this->input->post('link');
@@ -302,4 +352,6 @@ class Admin extends CI_Controller {
             redirect(site_url('admin/food_category'));
         }
     }
+
+
 }

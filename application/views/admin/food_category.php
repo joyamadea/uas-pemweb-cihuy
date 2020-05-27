@@ -55,7 +55,7 @@
                                         echo "<i class='fas fa-pencil-alt'></i>";
                                         echo "</a>";
 
-                                        echo "<a href='#' class='btn btn-danger btn-circle'>";
+                                        echo "<a href='".site_url('admin/delete/food_category/'.$o->categoryID)."' class='btn btn-danger btn-circle'>";
                                         echo "<i class='fas fa-trash'></i>";
                                         echo "</a>";
                                     echo "</td>";

@@ -2,12 +2,12 @@
 
 class Setup extends CI_Model{
 	function show_data(){
-        $query = $this->db->get('food');
+        $query = $this->db->get_where('food',array('status'=>'enabled'));
 		return $query->result();
 	}
 
 	function category(){
-		$query = $this->db->get('foodCategory');
+		$query = $this->db->get_where('foodCategory',array('status'=>'enabled'));
 		return $query->result();
 	}
 
@@ -15,6 +15,7 @@ class Setup extends CI_Model{
 		$query = $this->db->get('user');
 		return $query->result();
 	}
+
 	function getProd($id,$table){
 		if($table == 'food'){
 			$query = $this->db->query("SELECT * FROM $table WHERE `foodID`=$id");
@@ -34,6 +35,23 @@ class Setup extends CI_Model{
 	function addCategory($add){
 		$this->db->insert('foodCategory',$add);
 		return true;
+	}
+
+	function delete($del){
+		$id = $del['id'];
+		$table = $del['table'];
+
+		if($table == 'food'){
+			$this->db->where('foodID',$id);
+			$this->db->update($table,array('status'=>'disabled'));
+		}
+		else{
+			$this->db->where('categoryID',$id);
+			$this->db->update('foodCategory',array('status'=>'disabled'));
+		}
+
+		return true;
+		
 	}
 
 	function editCategory($edit){
