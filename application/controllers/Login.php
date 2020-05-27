@@ -22,7 +22,7 @@
          if($valid->run()) {
              $res=$this->M_account->login($email);
              if($res==false){
-                echo "login tidak sukses (email)";
+                $this->session->set_flashdata("sukses","Username/password incorrect");
             }
             else{
                 foreach($res as $r){
@@ -30,6 +30,7 @@
                     $dispName=$r->displayName;
                     $id=$r->custID;
                     $pic=$r->profileLink;
+                    $role=$r->role;
                 }
 
                 if(password_verify($password,$hash)){
@@ -38,8 +39,15 @@
                     $this->session->set_userdata('name',$dispName);
                     $this->session->set_userdata('id',$id);
                     $this->session->set_userdata('pic',$pic);
+                    $this->session->set_userdata('role',$role);
 
-                    redirect(base_url());
+                    if($role == 'admin'){
+                        redirect(site_url('admin'));
+                    }
+                    else if($role == 'user'){
+                        redirect(base_url());
+                    }
+                    
                     
                 }
                 else{
@@ -48,9 +56,10 @@
             }
          }
 
-         
+         $data['style'] = $this->load->view('include/style',NULL,TRUE);
+		$data['script'] = $this->load->view('include/script',NULL,TRUE);
          // End fungsi login
-         $this->load->view('account/v_login');
+         $this->load->view('account/v_login',$data);
      }
  
      public function out(){

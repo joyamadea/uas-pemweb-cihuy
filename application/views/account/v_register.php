@@ -1,54 +1,59 @@
-<?php
- defined('BASEPATH') OR exit('No direct script access allowed');
- ?><!DOCTYPE html>  
+<!DOCTYPE html>  
  <head>
    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>
      Foody Register
    </title>
+   <?php echo $style; ?>
  </head>
  <body>
-     <h2>Pendaftaran Akun</h2>
- 
-     <?php echo form_open('register');?> 
-     <p>Display Name:</p>
-     <p>
-     <input type="text" name="displayName" value="<?php echo set_value('displayName'); ?>"/> 
-     </p>
-     <p> <?php echo form_error('displayName'); ?> </p>
+      <div class="container mt-5 mb-5">
+        <h2>Register Page</h2><hr>
+        <?php echo form_open('register');?> 
+        <div class="form-group">
+          <label for="displayName">Display Name</label>
+          <input type="text" name="displayName" class="form-control" value="<?php echo set_value('displayName'); ?>"/> 
+          
+        </div>
+        <span class="text-danger"> <?php echo form_error('displayName'); ?> </span>
 
-     <p>Email:</p>
-     <p>
-     <input type="text" name="email" value="<?php echo set_value('email'); ?>"/>
-     </p>
-     <p> <?php echo form_error('email'); ?> </p>
- 
-     <p>Password:</p>
-     <p>
-     <input type="password" name="password" value="<?php echo set_value('password'); ?>"/>
-     </p>
-     <p> <?php echo form_error('password'); ?> </p>
- 
-     <p>Password Confirm:</p>
-     <p>
-     <input type="password" name="password_conf" value="<?php echo set_value('password_conf'); ?>"/>
-     </p>
-     <p> <?php echo form_error('password_conf'); ?> </p>
- 
-     <p>Birth Date:</p>
-     <p>
-     <input type="date" name="birthDate" value="<?php echo set_value('birthDate'); ?>"/>
-     </p>
-     <p> <?php echo form_error('birthDate'); ?> </p>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" name="email" class="form-control" value="<?php echo set_value('email'); ?>"/> 
+          
+        </div>
+        <span class="text-danger"> <?php echo form_error('email'); ?> </span>
 
-     <p>
-     <input type="submit" name="btnSubmit" value="Daftar" />
-     </p>
- 
-     <?php echo form_close();?>
- 
-     <p>
-     Kembali ke beranda, Silakan klik <?php echo anchor(site_url(),'di sini..'); ?>
-     </p>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" class="form-control" value="<?php echo set_value('password'); ?>"/> 
+          
+        </div>
+        <span class="text-danger"> <?php echo form_error('password'); ?> </span>
+
+        <div class="form-group">
+          <label for="password_conf">Confirm Password</label>
+          <input type="password" name="password_conf" class="form-control" value="<?php echo set_value('password_conf'); ?>"/> 
+          
+        </div>
+        <span class="text-danger"> <?php echo form_error('password_conf'); ?> </span>
+
+        <div class="form-group">
+          <label for="birthDate">Birth Date</label>
+          <input type="date" name="birthDate" class="form-control" value="<?php echo set_value('birthDate'); ?>"/> 
+          
+        </div>
+        <span class="text-danger"> <?php echo form_error('birthDate'); ?> </span>
+
+        <input type="submit" class="btn btn-primary mb-2" name="btnSubmit" value="Register" />
+
+        <?php echo form_close();?>
+
+        To go back to the main page, click <?php echo anchor(site_url(),'here'); ?>
+      </div>
+
+
+     <?php echo $script; ?>
  </body>
  </html>

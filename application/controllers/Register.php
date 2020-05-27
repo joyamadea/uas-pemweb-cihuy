@@ -18,10 +18,11 @@
          $this->form_validation->set_rules('password_conf','PASSWORD','required|matches[password]');
          $this->form_validation->set_rules('birthDate','BIRTHDATE','required');
          if($this->form_validation->run() == FALSE) {
-             $this->load->view('account/v_register');
+            $data['style'] = $this->load->view('include/style',NULL,TRUE);
+            $data['script'] = $this->load->view('include/script',NULL,TRUE);
+             $this->load->view('account/v_register',$data);
 
          }else{
-             echo '<script>console.log("Salah")</script>';
              $data['displayName']   =    $this->input->post('displayName');
              $data['password'] =    password_hash($this->input->post('password'), PASSWORD_BCRYPT);
              $data['email']  =    $this->input->post('email');
@@ -29,9 +30,11 @@
  
              $this->M_account->daftar($data);
              
-             $pesan['message'] =    "Pendaftaran berhasil";
+             $data['message'] =    "Registration success";
+             $data['style'] = $this->load->view('include/style',NULL,TRUE);
+            $data['script'] = $this->load->view('include/script',NULL,TRUE);
              
-             $this->load->view('account/v_success',$pesan);
+             $this->load->view('account/v_success',$data);
          }
      }
  }
