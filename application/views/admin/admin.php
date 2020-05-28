@@ -40,7 +40,6 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
           <!-- Content Row -->
@@ -130,18 +129,7 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
+                  
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -157,19 +145,8 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
+                  <h6 class="m-0 font-weight-bold text-primary">Payment Method</h6>
+                  
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -192,6 +169,7 @@
             </div>
           </div>
 
+
           <!-- Content Row -->
           <div class="row">
 
@@ -212,9 +190,9 @@
                   <div class="progress mb-4">
                     <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
-                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
+                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">Complete!</span></h4>
                   <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                   <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
                   <div class="progress mb-4">
@@ -231,6 +209,37 @@
 
             </div>
 
+            <div class="col-lg-6 mb-4">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Best Selling</h6>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <?php foreach($best as $b){?>
+                      <div class="col-3">
+                      <img src="<?php echo base_url('assets/uploads/files/').$b->photoLink?>" style="width:150px;">
+                      </div>
+                      <div class="col">
+                        
+                        <?php echo $b->name;?><br>
+                        Sold: <?php echo $b->quantity; ?>
+                        <div id="dataReadonlyReview"
+                            data-rating-stars="5"
+                            data-rating-readonly="true"
+                            data-rating-value="<?php echo $b->rating; ?>"
+                            data-rating-input="#dataReadonlyInput">
+                            
+                        </div>
+                      </div>
+                    <?php }?>
+                    
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
             
           </div>
 
@@ -240,15 +249,7 @@
       </div>
       <!-- End of Main Content -->
 
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+      <?php echo $footer; ?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -263,37 +264,82 @@
 
 
   <?php echo $script; ?>
+
+  <script type="text/javascript">
+        var ctx = document.getElementById('myAreaChart').getContext('2d');
+        var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [
+            <?php
+                foreach ($trans as $f) {
+                    echo "'" .date("d/m/y",strtotime($f->orderDate))."',";
+                }   
+            ?>
+            ],
+            datasets: [{
+                label: 'Total',
+                backgroundColor: '#ADD8E6',
+                borderColor: '##93C3D2',
+                data: [
+                <?php
+                    foreach ($trans as $f) {
+                        echo $f->total . ", ";
+                    }
+                ?>
+                ]
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            elements: {
+                line: {
+                    tension: 0.2
+                }
+            },
+            legend: {
+                display: false
+            }
+        }
+    });
+    
+    </script>
   <script type="text/javascript">
         var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
-  type: 'doughnut',
-  data: {
-    labels: ["Direct", "Referral", "Social"],
-    datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-      hoverBorderColor: "rgba(234, 236, 244, 1)",
-    }],
-  },
-  options: {
-    maintainAspectRatio: false,
-    tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      caretPadding: 10,
-    },
-    legend: {
-      display: false
-    },
-    cutoutPercentage: 80,
-  },
-});
+        var myPieChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels:[<?php foreach($payment as $p){
+              echo '"'.$p->payment.'",';
+
+            }?>],
+            datasets: [{
+              data: [<?php foreach($payment as $p){
+                echo $p->counted.",";
+              }?>],
+              backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+              hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+              hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+          },
+          options: {
+            maintainAspectRatio: false,
+            tooltips: {
+              backgroundColor: "rgb(255,255,255)",
+              bodyFontColor: "#858796",
+              borderColor: '#dddfeb',
+              borderWidth: 1,
+              xPadding: 15,
+              yPadding: 15,
+              displayColors: false,
+              caretPadding: 10,
+            },
+            legend: {
+              display: false
+            },
+            cutoutPercentage: 80,
+          },
+        });
     </script>
 </body>
 

@@ -12,7 +12,7 @@ class Setup extends CI_Model{
 	}
 
 	function user(){
-		$query = $this->db->get('user');
+		$query = $this->db->get_where('user',array('role'=>'user'));
 		return $query->result();
 	}
 

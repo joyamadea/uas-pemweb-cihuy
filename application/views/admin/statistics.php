@@ -21,26 +21,57 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Statistics</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
-                    <div cass="row">
+                   
+                    <div class="row">
+
+                        <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Daily Earning</h6>
-                                </div>
-                                <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myChart"></canvas>
-                                </div>
-                                <hr>
-                                Styling for the area chart can be found in the <code>/js/demo/chart-area-demo.js</code> file.
-                                </div>
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Daily Earnings</h6>
+                            
                             </div>
-
+                            <!-- Card Body -->
+                            <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            </div>
                         </div>
-                    </div>
+                        </div>
+
+                        <!-- Pie Chart -->
+                        <div class="col-xl-4 col-lg-5">
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Dropdown -->
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Payment Methods</h6>
+                            
+                            </div>
+                            <!-- Card Body -->
+                            <div class="card-body">
+                            <div class="chart-pie pt-4 pb-2">
+                                <canvas id="myPieChart"></canvas>
+                            </div>
+                            <div class="mt-4 text-center small">
+                                <span class="mr-2">
+                                <i class="fas fa-circle text-primary"></i> Cash
+                                </span>
+                                <span class="mr-2">
+                                <i class="fas fa-circle text-success"></i> Debit
+                                </span>
+                                <span class="mr-2">
+                                <i class="fas fa-circle text-info"></i> Credit
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        
                 </div>
             </div>
         </div>
@@ -93,6 +124,44 @@
         }
     });
     
+    </script>
+
+<script type="text/javascript">
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels:[<?php foreach($payment as $p){
+              echo '"'.$p->payment.'",';
+
+            }?>],
+            datasets: [{
+              data: [<?php foreach($payment as $p){
+                echo $p->counted.",";
+              }?>],
+              backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+              hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+              hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+          },
+          options: {
+            maintainAspectRatio: false,
+            tooltips: {
+              backgroundColor: "rgb(255,255,255)",
+              bodyFontColor: "#858796",
+              borderColor: '#dddfeb',
+              borderWidth: 1,
+              xPadding: 15,
+              yPadding: 15,
+              displayColors: false,
+              caretPadding: 10,
+            },
+            legend: {
+              display: false
+            },
+            cutoutPercentage: 80,
+          },
+        });
     </script>
 </body>
 </html>

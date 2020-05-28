@@ -21,12 +21,20 @@ class Stats extends CI_Model{
 		return $query->result();
 	}
 
-	
-
 	function overallRating(){
 		$query = $this->db->query("SELECT COUNT(*) AS counted, SUM(rating) AS total FROM `food` WHERE `rating` != 0");
 		$overall = (int)$query->result()[0]->total / (int)$query->result()[0]->counted;
 		return $overall;
+	}
+
+	function payment(){
+		$query = $this->db->query("SELECT p.`payment` AS payment, COUNT(t.paymentType) AS counted FROM `transaction` as t, `payment` as p WHERE t.paymentType = p.paymentID AND `status`=1 GROUP BY t.`paymentType`");
+		return $query->result();
+	}
+
+	function best(){
+		$query = $this->db->query("SELECT f.foodName AS 'name', f.photoLink as 'photoLink', f.rating as 'rating', SUM(t.quantity) AS quantity FROM transactiondetail as t, food as f WHERE f.foodID = t.foodID GROUP BY t.foodID ORDER BY `quantity` DESC LIMIT 1");
+		return $query->result();
 	}
 }
 

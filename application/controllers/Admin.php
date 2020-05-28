@@ -20,8 +20,9 @@ class Admin extends CI_Controller {
         $data['script'] = $this->load->view('include/script',NULL,TRUE);
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
+        $data['footer'] = $this->load->view('templates/footer',NULL,TRUE);
         
-        if(!$this->session->userdata('name')){
+        if(!$this->session->userdata('name') || $this->session->userdata('role') == 'user'){
             redirect(base_url());
         }
         else{
@@ -30,6 +31,9 @@ class Admin extends CI_Controller {
             $thisMonth = mdate("%m");
             $data['monthly'] = $this->stats->monthlySales($thisMonth)[0]->total;;
             $data['rating'] = $this->stats->overallRating();
+            $data['payment'] = $this->stats->payment();
+            $data['trans'] = $this->stats->daily_data($thisMonth);
+            $data['best'] = $this->stats->best();
             
             $this->load->view('admin/admin.php', $data);
         }
@@ -42,12 +46,13 @@ class Admin extends CI_Controller {
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
         
-        if(!$this->session->userdata('name')){
+        if(!$this->session->userdata('name')  || $this->session->userdata('role') == 'user'){
             redirect(base_url());
         }
         else{
             $thisMonth = mdate("%m");
             $data['trans'] = $this->stats->daily_data($thisMonth);
+            $data['payment'] = $this->stats->payment();
             
             $this->load->view('admin/statistics.php', $data);
         }
@@ -62,7 +67,7 @@ class Admin extends CI_Controller {
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
 
-        if(!$this->session->userdata('name')){
+        if(!$this->session->userdata('name') || $this->session->userdata('role') == 'user'){
             redirect(base_url());
         }
         else{
@@ -81,7 +86,7 @@ class Admin extends CI_Controller {
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
 
-        if(!$this->session->userdata('name')){
+        if(!$this->session->userdata('name') || $this->session->userdata('role') == 'user'){
             redirect(base_url());
         }
         else{
@@ -99,7 +104,7 @@ class Admin extends CI_Controller {
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
 
-        if(!$this->session->userdata('name')){
+        if(!$this->session->userdata('name') || $this->session->userdata('role') == 'user'){
             redirect(base_url());
         }
         else{
@@ -117,7 +122,7 @@ class Admin extends CI_Controller {
         $data['sidebar'] = $this->load->view('templates/sidebar',NULL,TRUE);
         $data['topbar'] = $this->load->view('templates/topbar',NULL,TRUE);
 
-        if(!$this->session->userdata('name')){
+        if(!$this->session->userdata('name') || $this->session->userdata('role') == 'user'){
             redirect(base_url());
         }
         else{

@@ -52,7 +52,7 @@
                                     echo "<tr>";
                                     echo "<td>".$o->email."</td>";
                                     echo "<td>".$o->displayName."</td>";
-                                    echo "<td>".$o->birthDate."</td>";
+                                    echo "<td>".date("d M Y", strtotime($o->birthDate))."</td>";
                                     echo "<td><img style='height:100px;' src='".site_url('assets/uploads/profile/').$o->profileLink."'</td>";
                                 }?>
                                 
