@@ -34,7 +34,7 @@
         $url=base_url().'restaurant/product/'.$data['foodID'];
 
         if($data['custID'] == null){
-            $this->load->view('account/v_login.php');
+            redirect(site_url('login'));
         }
         else if($data['quantity'] == 0){
             $this->session->set_flashdata('prodFail','Amount has to be > 0');

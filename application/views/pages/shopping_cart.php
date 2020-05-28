@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shopping Cart</title>
     <?php echo $style; ?>
     <style>
         ul#list li{
@@ -32,7 +32,7 @@
         
         <?php if(!$this->carty->getTransId()){ ?>
             <div class="col">
-                <img src="assets/lonely.jpg" style="width:40%;">
+                <img src="./assets/img/empty_cart.svg" style="width:35%;margin-bottom:3%;">
                 <span style="font-size:20px;">It looks lonely here...</span><br>
                 <a class="btn btn-primary btn-block" href="<?php echo base_url(); ?>">Let's order some food!</a>
             </div>

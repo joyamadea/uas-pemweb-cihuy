@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rating</title>
     <?php echo $style; ?>
 </head>
-<body style="background:#fff2e1">
+<body>
     <?php echo $navbar; ?>
 
-    <div class="container">
+    <div class="container mb-5 mt-5">
         <div class="d-flex flex-column flex-lg-row">
-        <img src="./assets/deliveryman.jpg" style="width:45%;">
+        <img src="./assets/img/on_the_way.svg" style="width:45%;margin-bottom:3%;">
         <p><span style="font-size:24px; font-weight:500;">Thank you for ordering!</span>
         <br>Please rate our food so we can provide the best experience for everyone</p>
         </div>
@@ -47,7 +47,7 @@
         
         <?php } ?>
         <input type="hidden" name="index" value="<?php echo $index-1;?>">
-        <div class="mt-3" style="self-align:right;">
+        <div class="mt-3" style="self-align:right;margin-left:auto;">
             <a class="btn btn-outline-secondary" href="<?php echo base_url();?>">Skip Rating</a>
             <input type="submit" value="Rate" class="btn btn-primary">
         </div>

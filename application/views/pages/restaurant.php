@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
     <?php echo $style; ?>
     <style>
         /* unvisited link */
@@ -71,9 +72,9 @@
                         <div class="card mb-5">
                             <img class="card-img-top" alt="picture of product" src="<?php echo site_url('assets/uploads/files/').$f->photoLink; ?>" width="200px">
                             <div class="body m-3">
-                                <p class="card-title"><b><?php echo $f->foodName ?></b></p>
-                                <p class="card-text"><?php echo $f->desc ?></p>
-                                <p class="card-text"><?php echo 'Rp '.number_format($f->price,0,',','.') ?></p>
+                                <span class="card-title"><b><?php echo $f->foodName ?></b></span><br>
+                                <span class="card-text" style="font-weight:500;font-size:14px;"><?php echo 'Rp '.number_format($f->price,0,',','.') ?></span><br>
+                                <span class="card-text" style="font-size:14px;"><?php echo $f->desc ?></span>
                             </div>
                         </div>
                         </a>
