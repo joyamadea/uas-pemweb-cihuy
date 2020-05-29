@@ -38,11 +38,11 @@ class Admin extends CI_Controller {
             $data['rating'] = $this->stats->overallRating();
             $data['payment'] = $this->stats->payment();
             $data['trans'] = $this->stats->daily_data($thisMonth);
-            if($this->stats->best()[0]->quantity != 0){
-                $data['best'] = $this->stats->best();
+            if(!$this->stats->best()){
+                $data['best'] = "No";   
             }
             else{
-                $data['best'] = "No";
+                $data['best'] = $this->stats->best();
             }
             
             

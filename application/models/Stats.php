@@ -8,7 +8,7 @@ class Stats extends CI_Model{
 
 	function monthlySales($month){
 		$query = $this->db->query("SELECT COUNT(*) AS counted, `orderDate` AS dated, SUM(total) AS total FROM `transaction` WHERE MONTH(orderDate) = $month AND `status` = 1 GROUP BY MONTH(orderDate) ");
-		if($query->num_rows()){
+		if($query->num_rows() > 0 ){
 			return $query->result();
 		}
 		else{
@@ -29,8 +29,14 @@ class Stats extends CI_Model{
 
 	function overallRating(){
 		$query = $this->db->query("SELECT COUNT(*) AS counted, SUM(rating) AS total FROM `food` WHERE `rating` != 0");
-		$overall = (int)$query->result()[0]->total / (int)$query->result()[0]->counted;
-		return $overall;
+		if($query->result()[0]->counted > 0){
+			$overall = (int)$query->result()[0]->total / (int)$query->result()[0]->counted;
+			return $overall;
+		}
+		else{
+			return false;
+		}
+		
 	}
 
 	function payment(){
@@ -40,7 +46,13 @@ class Stats extends CI_Model{
 
 	function best(){
 		$query = $this->db->query("SELECT f.foodName AS 'name', f.photoLink as 'photoLink', f.rating as 'rating', SUM(t.quantity) AS quantity FROM transactiondetail as t, food as f WHERE f.foodID = t.foodID GROUP BY t.foodID ORDER BY `quantity` DESC LIMIT 1");
-		return $query->result();
+		if($query->num_rows() > 0){
+			return $query->result();
+		}
+		else{
+			return false;
+		}
+		
 	}
 }
 
