@@ -164,7 +164,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`custID`, `email`, `displayName`, `password`, `birthDate`, `profileLink`, `role`) VALUES
 (1, 'uwu@gmail.com', 'joy', '$2y$10$2no4qZ0IQk6K8DC80e7FhOGZwlroFdHnDEH518fuSQQ/2N/XBLrCK', '1999-12-15', 'default.jpg', 'user'),
-(2, 'admin@gmail.com', 'admin', '$2y$10$BBBJnSsYAuL3BUiE8zWl2uCu0ZkyQluq8HahuZpsB6YZGgbt3ZBGe', '2020-05-11', 'default.png', 'admin'),
+(2, 'admin@gmail.com', 'admin', '$2y$10$BBBJnSsYAuL3BUiE8zWl2uCu0ZkyQluq8HahuZpsB6YZGgbt3ZBGe', '2020-05-11', 'default.png', 'admin');
 
 --
 -- Indexes for dumped tables

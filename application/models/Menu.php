@@ -2,7 +2,7 @@
 
 class Menu extends CI_Model{
 	function show_data(){
-		return $this->db->get('food');
+		return $this->db->get_where('food', array('status' => 'enabled'));
 	}	
 	public function getDataWhere($field, $search)
 	{
