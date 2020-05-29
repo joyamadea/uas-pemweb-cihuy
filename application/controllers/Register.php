@@ -13,10 +13,10 @@
      public function index() {
  
          $this->form_validation->set_rules('displayName', 'DISPLAYNAME','required');
-         $this->form_validation->set_rules('email','EMAIL','required|valid_email');
+         $this->form_validation->set_rules('email','EMAIL','required|valid_email|is_unique[user.email]');
          $this->form_validation->set_rules('password','PASSWORD','required');
          $this->form_validation->set_rules('password_conf','PASSWORD','required|matches[password]');
-         $this->form_validation->set_rules('birthDate','BIRTHDATE','required');
+         $this->form_validation->set_rules('birthDate','BIRTHDATE','callback_validateAge');
          if($this->form_validation->run() == FALSE) {
             $data['style'] = $this->load->view('include/style',NULL,TRUE);
             $data['script'] = $this->load->view('include/script',NULL,TRUE);
@@ -37,4 +37,14 @@
              $this->load->view('account/v_success',$data);
          }
      }
+    function validateAge($then, $min)
+    {
+        // $then will first be a string-date
+        $then = strtotime($then);
+        //The age to be over, over +13
+        $min = strtotime('+13 years', $then);
+        if(time() < $min)  {
+            die('Not 13'); 
+        }
+    }
  }
