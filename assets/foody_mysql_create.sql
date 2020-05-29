@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2020 at 01:16 PM
+-- Generation Time: May 29, 2020 at 08:07 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -36,35 +36,37 @@ CREATE TABLE `food` (
   `photoLink` varchar(255) NOT NULL,
   `desc` varchar(255) NOT NULL,
   `price` float NOT NULL,
-  `rating` float NOT NULL DEFAULT 0
+  `rating` float NOT NULL DEFAULT -1,
+  `status` varchar(255) NOT NULL DEFAULT 'enabled'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `food`
 --
 
-INSERT INTO `food` (`foodID`, `foodName`, `foodCategory`, `stock`, `photoLink`, `desc`, `price`, `rating`) VALUES
-(1, 'Mushroom Soup', 1, 8, 'Creamy-Garlic-Mushroom-Soup-spoon.jpg', 'Creamy mushroom soup that will warm your body', 40000, 0),
-(2, 'Chicken Soup', 1, 18, 'soup.jpg', 'Creamy and cheesy chicken soup that will warm your body', 45000, 0),
-(3, 'Seasoned Fries', 1, 20, 'frozenfrenchfries14.jpg', 'Seasoned with our specialty herbs and with your choice of dipping sauce', 40000, 0),
-(4, 'Potato Wedges', 1, 15, 'crispy-garlic-potato-wedges-6.jpg', 'Crisp on the outside, tender on the inside. This potato wedges will be served with our specialty ranch dressing on the side', 45000, 0),
-(5, 'Calamari Rings', 1, 15, 'Flourless-Truly-Crispy-Calamari-Rings-In-The-Air-Fryer.jpg', 'Rings of squid coated in a super crispy, crunchy shell', 48000, 0),
-(6, 'Tenderloin Steak', 2, 20, '045813900_1489071066-sirloin.jpg', 'Thick, hearty, juicy steak cooked according to your liking', 300000, 0),
-(7, 'Spaghetti Carbonara', 2, 20, 'recipe-image-legacy-id--1001491_11.jpg', 'Creamy pasta cooked to al dente', 70000, 0),
-(8, 'Chicken Cordon Bleu', 2, 15, 'Chicken-Cordon-Bleu_2.jpg', 'Fried to golden brown, this chicken dish will melt in your mouth', 75000, 0),
-(9, 'Fish and Chips', 2, 23, 'Resep-Fish-chips.jpg', 'You can never go wrong with classic fish and chip', 75000, 0),
-(10, 'Club Burger', 2, 10, 'clubborgar.jpg', 'Big burger with layers of bacon, cheese, and all the goodness with fries as the side', 160000,0),
-(11, 'Chicken Steak', 2, 20, '8fd1e8e3-bda8-4c8d-9fc3-148cf2d1eb19.jpg', 'Delicious and thickly cut chicken steak', 120000,0),
-(12, 'Chocolate Lava Cake', 3, 20, 'IMG_6207-chocolate-molten-lava-cakes-recipe-square.jpg', 'Chocolate goodness that will melt in your mouth', 40000, 0),
-(13, 'Gelato Ice Cream', 3, 20, '76389-es-krim-neapolitan-shutterstock.jpg', 'Italian style ice cream (Chocolate, Strawberry, Vanilla flavor)', 35000, 0),
-(14, 'Panna Cotta', 3, 21, 'panna-cotta-620.jpg', 'Soft and creamy panna cotta, topped with berries and sauce',40000,0),
-(15, '3pc Macaroon', 3, 20, 'macaroon.jpg', '3 pieces of sweet goodness (Flavor: Lemon, Strawberry, Grape, Chocolate, Oreo)',36000,0),
-(16, 'Banana Split', 3, 18, 'Banana+Split.jpg', 'Classic banana split dessert with our renowed gelato. Share with your friends!', 70000,0),
-(17, 'Lemonade', 4, 20, '2586d951-a46a-4091-aec6-eca3adefb409.jpg', 'Refreshing lemonade, perfect for summer!', 28000, 0),
-(18, 'Americano', 4, 15, 'hot-americano.jpg', 'Hot/Cold version available', 25000,0),
-(19, 'Cappuccino', 4, 20, '1280px-Cappuccino.jpg', 'Hot/Cold version available', 35000,0),
-(20, 'Oreo Shake', 4, 25, 'oreoshake.png', 'Blended oreo milkshake. Sweet and rich', 40000,0 ),
-(21, 'Lemon Tea', 4, 20, 'freshlemontea.jpg','Fresh lemon tea. Hot/Cold available', 30000, 0);
+INSERT INTO `food` (`foodID`, `foodName`, `foodCategory`, `stock`, `photoLink`, `desc`, `price`, `rating`, `status`) VALUES
+(1, 'Mushroom Soup', 1, 0, 'Creamy-Garlic-Mushroom-Soup-spoon.jpg', 'Creamy mushroom soup that will warm your body', 40000, 0, 'enabled'),
+(2, 'Chicken Soup', 1, 18, 'soup.jpg', 'Creamy and cheesy chicken soup that will warm your body', 45000, 0, 'enabled'),
+(3, 'Seasoned Fries', 1, 19, 'frozenfrenchfries14.jpg', 'Seasoned with our specialty herbs and with your choice of dipping sauce', 40000, 0, 'enabled'),
+(4, 'Potato Wedges', 1, 15, 'crispy-garlic-potato-wedges-6.jpg', 'Crisp on the outside, tender on the inside. This potato wedges will be served with our specialty ranch dressing on the side', 45000, 0, 'enabled'),
+(5, 'Calamari Rings', 1, 15, 'Flourless-Truly-Crispy-Calamari-Rings-In-The-Air-Fryer.jpg', 'Rings of squid coated in a super crispy, crunchy shell', 48000, 0, 'enabled'),
+(6, 'Tenderloin Steak', 2, 20, '045813900_1489071066-sirloin.jpg', 'Thick, hearty, juicy steak cooked according to your liking', 300000, 0, 'enabled'),
+(7, 'Spaghetti Carbonara', 2, 17, 'recipe-image-legacy-id--1001491_11.jpg', 'Creamy pasta cooked to al dente', 70000, 4, 'disabled'),
+(8, 'Chicken Cordon Bleu', 2, 14, 'Chicken-Cordon-Bleu_2.jpg', 'Fried to golden brown, this chicken dish will melt in your mouth', 75000, 5, 'disabled'),
+(9, 'Fish and Chips', 2, 23, 'Resep-Fish-chips.jpg', 'You can never go wrong with classic fish and chip', 75000, 0, 'enabled'),
+(10, 'Club Burger', 2, 10, 'clubborgar.jpg', 'Big burger with layers of bacon, cheese, and all the goodness with fries as the side', 160000, 0, 'enabled'),
+(11, 'Chicken Steak', 2, 20, '8fd1e8e3-bda8-4c8d-9fc3-148cf2d1eb19.jpg', 'Delicious and thickly cut chicken steak', 120000, 0, 'enabled'),
+(12, 'Chocolate Lava Cake', 3, 20, 'IMG_6207-chocolate-molten-lava-cakes-recipe-square.jpg', 'Chocolate goodness that will melt in your mouth', 40000, 0, 'enabled'),
+(13, 'Gelato Ice Cream', 3, 20, '76389-es-krim-neapolitan-shutterstock.jpg', 'Italian style ice cream (Chocolate, Strawberry, Vanilla flavor)', 35000, 0, 'enabled'),
+(14, 'Panna Cotta', 3, 21, 'panna-cotta-620.jpg', 'Soft and creamy panna cotta, topped with berries and sauce', 40000, 0, 'enabled'),
+(15, '3pc Macaroon', 3, 20, 'macaroon.jpg', '3 pieces of sweet goodness (Flavor: Lemon, Strawberry, Grape, Chocolate, Oreo)', 36000, 0, 'enabled'),
+(16, 'Banana Split', 3, 18, 'Banana+Split.jpg', 'Classic banana split dessert with our renowed gelato. Share with your friends!', 70000, 0, 'disabled'),
+(17, 'Lemonade', 4, 20, '2586d951-a46a-4091-aec6-eca3adefb409.jpg', 'Refreshing lemonade, perfect for summer!', 28000, 0, 'enabled'),
+(18, 'Americano', 4, 15, 'hot-americano.jpg', 'Hot/Cold version available', 25000, 0, 'enabled'),
+(19, 'Cappuccino', 4, 18, '1280px-Cappuccino.jpg', 'Hot/Cold version available', 35000, 5, 'disabled'),
+(20, 'Oreo Shake', 4, 25, 'oreoshake.png', 'Blended oreo milkshake. Sweet and rich', 40000, 0, 'enabled'),
+(21, 'Lemon Tea', 4, 20, 'freshlemontea.jpg', 'Fresh lemon tea. Hot/Cold available', 30000, 0, 'enabled');
+
 -- --------------------------------------------------------
 
 --
@@ -73,18 +75,20 @@ INSERT INTO `food` (`foodID`, `foodName`, `foodCategory`, `stock`, `photoLink`, 
 
 CREATE TABLE `foodcategory` (
   `categoryID` int(3) NOT NULL,
-  `categoryName` varchar(255) NOT NULL
+  `categoryName` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'enabled'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `foodcategory`
 --
 
-INSERT INTO `foodcategory` (`categoryID`, `categoryName`) VALUES
-(1, 'Appetizer'),
-(2, 'Main Course'),
-(3, 'Dessert'),
-(4, 'Beverage');
+INSERT INTO `foodcategory` (`categoryID`, `categoryName`, `status`) VALUES
+(1, 'Appetizer', 'enabled'),
+(2, 'Main Course', 'enabled'),
+(3, 'Dessert', 'enabled'),
+(4, 'Beverage', 'enabled'),
+(7, 'Mocktail', 'disabled');
 
 -- --------------------------------------------------------
 
@@ -123,6 +127,7 @@ CREATE TABLE `transaction` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+
 -- --------------------------------------------------------
 
 --
@@ -158,8 +163,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`custID`, `email`, `displayName`, `password`, `birthDate`, `profileLink`, `role`) VALUES
-(1, 'uwu@gmail.com', 'joy', '$2y$10$2no4qZ0IQk6K8DC80e7FhOGZwlroFdHnDEH518fuSQQ/2N/XBLrCK', '1999-12-15', 'default.png', 'user'),
-(2, 'admin@gmail.com', 'admin', '$2y$10$BBBJnSsYAuL3BUiE8zWl2uCu0ZkyQluq8HahuZpsB6YZGgbt3ZBGe', '2020-05-11', 'default.png', 'admin');
+(1, 'uwu@gmail.com', 'joy', '$2y$10$2no4qZ0IQk6K8DC80e7FhOGZwlroFdHnDEH518fuSQQ/2N/XBLrCK', '1999-12-15', 'default.jpg', 'user'),
+(2, 'admin@gmail.com', 'admin', '$2y$10$BBBJnSsYAuL3BUiE8zWl2uCu0ZkyQluq8HahuZpsB6YZGgbt3ZBGe', '2020-05-11', 'default.png', 'admin'),
 
 --
 -- Indexes for dumped tables
@@ -213,25 +218,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `foodID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `foodID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `foodcategory`
 --
 ALTER TABLE `foodcategory`
-  MODIFY `categoryID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `categoryID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `transID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `transID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `custID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `custID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
