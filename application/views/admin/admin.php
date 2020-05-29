@@ -216,25 +216,29 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <?php foreach($best as $b){?>
-                      <div class="col-3">
-                      <img src="<?php echo base_url('assets/uploads/files/').$b->photoLink?>" style="width:150px;">
-                      </div>
-                      <div class="col">
-                        
-                        <?php echo $b->name;?><br>
-                        Sold: <?php echo $b->quantity; ?>
-                        <div id="dataReadonlyReview"
-                            data-rating-stars="5"
-                            data-rating-readonly="true"
-                            data-rating-value="<?php echo $b->rating; ?>"
-                            data-rating-input="#dataReadonlyInput">
-                            
+                    <?php if($best != "No"){?>
+                      <?php foreach($best as $b){?>
+                        <div class="col-3">
+                        <img src="<?php echo base_url('assets/uploads/files/').$b->photoLink?>" style="width:150px;">
                         </div>
-                      </div>
-                    <?php }?>
-                    
-
+                        <div class="col">
+                          
+                          <?php echo $b->name;?><br>
+                          Sold: <?php echo $b->quantity; ?>
+                          <div id="dataReadonlyReview"
+                              data-rating-stars="5"
+                              data-rating-readonly="true"
+                              data-rating-value="<?php echo $b->rating; ?>"
+                              data-rating-input="#dataReadonlyInput">
+                              
+                          </div>
+                        </div>
+                      <?php }?>
+                      <?php } else{?>
+                        <div class="col">
+                          No products sold yet
+                        </div>
+                      <?php }?>
                   </div>
                 </div>
               </div>

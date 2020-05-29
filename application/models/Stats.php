@@ -8,7 +8,13 @@ class Stats extends CI_Model{
 
 	function monthlySales($month){
 		$query = $this->db->query("SELECT COUNT(*) AS counted, `orderDate` AS dated, SUM(total) AS total FROM `transaction` WHERE MONTH(orderDate) = $month AND `status` = 1 GROUP BY MONTH(orderDate) ");
-		return $query->result();
+		if($query->num_rows()){
+			return $query->result();
+		}
+		else{
+			return false;
+		}
+		
 	}
 
 	function sum(){

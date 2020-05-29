@@ -29,11 +29,22 @@ class Admin extends CI_Controller {
             $data['total'] =  $this->stats->sum()[0]->total;
             $data['users'] = $this->stats->users()[0]->total;
             $thisMonth = mdate("%m");
-            $data['monthly'] = $this->stats->monthlySales($thisMonth)[0]->total;;
+            if(!$this->stats->monthlySales($thisMonth)){
+                $data['monthly'] = 0;
+            }
+            else{
+                $data['monthly'] = $this->stats->monthlySales($thisMonth)[0]->total;
+            }
             $data['rating'] = $this->stats->overallRating();
             $data['payment'] = $this->stats->payment();
             $data['trans'] = $this->stats->daily_data($thisMonth);
-            $data['best'] = $this->stats->best();
+            if($this->stats->best()[0]->quantity != 0){
+                $data['best'] = $this->stats->best();
+            }
+            else{
+                $data['best'] = "No";
+            }
+            
             
             $this->load->view('admin/admin.php', $data);
         }
