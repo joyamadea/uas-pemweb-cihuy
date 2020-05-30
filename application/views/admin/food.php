@@ -58,7 +58,7 @@
                                     echo "<tr>";
                                     echo "<td>".$o->foodName."</td>";
                                     foreach($cat as $c){
-                                        if($o->foodCategory == $c->categoryID){
+                                        if($o->foodcategory == $c->categoryID){
                                             echo "<td>".$c->categoryName."</td>";
                                         }
                                     }

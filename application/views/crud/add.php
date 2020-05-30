@@ -58,14 +58,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="foodCategory" class="col-sm-2 col-form-label">Food Category</label>
+                            <label for="foodcategory" class="col-sm-2 col-form-label">Food Category</label>
                             <div class="col-sm-10">
-                            <select class="form-control" name="foodCategory" id="foodCategory" >
+                            <select class="form-control" name="foodcategory" id="foodcategory" >
                                 <!-- Food Category Options -->
                                 <option value=""></option>
                                 <?php foreach($cat as $c){?>
                                 <option value="<?php echo $c->categoryID; ?>"
-                                <?php if($this->session->flashdata('set') && $this->session->flashdata('set')['foodCategory'] == $c->categoryID) echo "selected"; ?>><?php echo $c->categoryName;?></option>
+                                <?php if($this->session->flashdata('set') && $this->session->flashdata('set')['foodcategory'] == $c->categoryID) echo "selected"; ?>><?php echo $c->categoryName;?></option>
                                 <?php } ?>
                             </select>
                             </div>
@@ -113,7 +113,7 @@
                         <?php } else if($this->uri->segment(3) == "food_category"){ ?>
                         
                         <!-- Food Table Edit Start -->
-                        <?php echo form_open('admin/addFoodCategory');?>
+                        <?php echo form_open('admin/addfoodcategory');?>
                         <div class="form-group row">
                             <label for="categoryName" class="col-sm-2 col-form-label">Category Name</label>
                             <div class="col-sm-10">

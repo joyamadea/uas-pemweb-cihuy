@@ -6,8 +6,8 @@ class Menu extends CI_Model{
 	}	
 	public function getDataWhere($field, $search)
 	{
-		if($field=="foodCategory"){
-			$query = $this->db->get_where('foodCategory',array('categoryName' => $search));
+		if($field=="foodcategory"){
+			$query = $this->db->get_where('foodcategory',array('categoryName' => $search));
 			foreach ($query->result() as $row){
 				$search = $row->categoryID;
 			}
@@ -28,7 +28,7 @@ class Menu extends CI_Model{
 	}
 
 	public function getProdRating($id){
-		$query = $this->db->query("SELECT COUNT(rated) AS counted FROM `transactionDetail` WHERE `foodID`='$id'");
+		$query = $this->db->query("SELECT COUNT(rated) AS counted FROM `transactiondetail` WHERE `foodID`='$id'");
 		return $query->result();
 	}
 
@@ -36,7 +36,7 @@ class Menu extends CI_Model{
 	public function getDataOf($input)
 	{
 		if(strlen($input)<5){
-			$query = $this->db->query("SELECT * FROM food WHERE foodCategory=$input");
+			$query = $this->db->query("SELECT * FROM food WHERE foodcategory=$input");
 		}
 		else $query = $this->db->query("SELECT * FROM food WHERE price$input");
 		return $query->result(); 
@@ -44,7 +44,7 @@ class Menu extends CI_Model{
 
     function getAllCategory()
     {
-        $query = $this->db->query('SELECT * FROM foodCategory');
+        $query = $this->db->query('SELECT * FROM foodcategory');
         return $query->result();
 	}
 	

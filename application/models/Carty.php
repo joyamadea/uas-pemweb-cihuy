@@ -20,7 +20,7 @@
             'quantity'=>$data['quantity']
 
         );
-        $this->db->insert('transactionDetail',$partitioned);
+        $this->db->insert('transactiondetail',$partitioned);
     }
 
     function updateTotal($data){
@@ -51,12 +51,12 @@
     }
 
     function getItems($id){
-        $query = $this->db->get_where('transactionDetail',array('transID'=>$id));
+        $query = $this->db->get_where('transactiondetail',array('transID'=>$id));
         return $query->result();
     }
 
     function getDetailItems(){
-        $query = $this->db->get('transactionDetail');
+        $query = $this->db->get('transactiondetail');
         return $query->result();
     }
 
@@ -89,12 +89,12 @@
     }
 
     function checkRow($id){
-        $query = $this->db->get_where('transactionDetail',array('transID'=>$id));
+        $query = $this->db->get_where('transactiondetail',array('transID'=>$id));
         return $query->num_rows();
     }
 
     function deleteItem($data){
-        $query = $this->db->get_where('transactionDetail',$data);
+        $query = $this->db->get_where('transactiondetail',$data);
         $quant = $query->result()[0]->quantity;
         $foodID = $data['foodID'];
         $query2 = $this->db->query("SELECT `price` FROM `food` WHERE `foodID`='$foodID'");
@@ -112,7 +112,7 @@
         $this->db->update('transaction',array('total'=>$curTotal));
 
         $this->db->where($data);
-        $this->db->delete('transactionDetail');
+        $this->db->delete('transactiondetail');
 
     }
 
@@ -123,12 +123,12 @@
 
     function rateFood($data){
         $this->db->where(array('foodID'=>$data['foodID'],'transID'=>$data['transId']));
-        $this->db->update('transactionDetail',array('rated'=>$data['rating']));
+        $this->db->update('transactiondetail',array('rated'=>$data['rating']));
         $foodID = $data['foodID'];
         $transID = $data['transId'];
 
 
-        $query = $this->db->query("SELECT COUNT(*) AS counted, SUM(`rated`) AS total FROM `transactionDetail` WHERE `foodID`='$foodID' AND `rated` IS NOT NULL");
+        $query = $this->db->query("SELECT COUNT(*) AS counted, SUM(`rated`) AS total FROM `transactiondetail` WHERE `foodID`='$foodID' AND `rated` IS NOT NULL");
         $counted = $query->result()[0]->counted;
         $total = $query->result()[0]->total;
 

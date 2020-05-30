@@ -7,7 +7,7 @@ class Setup extends CI_Model{
 	}
 
 	function category(){
-		$query = $this->db->get_where('foodCategory',array('status'=>'enabled'));
+		$query = $this->db->get_where('foodcategory',array('status'=>'enabled'));
 		return $query->result();
 	}
 
@@ -21,7 +21,7 @@ class Setup extends CI_Model{
 			$query = $this->db->query("SELECT * FROM $table WHERE `foodID`=$id");
 		}
 		else if($table == 'food_category'){
-			$query = $this->db->query("SELECT * FROM `foodCategory` WHERE `categoryID`=$id");
+			$query = $this->db->query("SELECT * FROM `foodcategory` WHERE `categoryID`=$id");
 		}
 		return $query->result();
 		
@@ -33,7 +33,7 @@ class Setup extends CI_Model{
 	}
 
 	function addCategory($add){
-		$this->db->insert('foodCategory',$add);
+		$this->db->insert('foodcategory',$add);
 		return true;
 	}
 
@@ -47,7 +47,7 @@ class Setup extends CI_Model{
 		}
 		else{
 			$this->db->where('categoryID',$id);
-			$this->db->update('foodCategory',array('status'=>'disabled'));
+			$this->db->update('foodcategory',array('status'=>'disabled'));
 		}
 
 		return true;
@@ -56,14 +56,14 @@ class Setup extends CI_Model{
 
 	function editCategory($edit){
 		$this->db->where('categoryID', $edit['id']);
-		$this->db->update('foodCategory', array('categoryName' => $edit['name']));
+		$this->db->update('foodcategory', array('categoryName' => $edit['name']));
 		return true;
 	}
 
 	function editFood($edit){
 		$this->db->where('foodID',$edit['id']);
 		$this->db->update('food',array('foodName' => $edit['name'],
-						'foodCategory' => $edit['category'],
+						'foodcategory' => $edit['category'],
 						'stock' => $edit['stock'],
 						'photoLink' => $edit['photo'],
 						'desc' => $edit['desc'],

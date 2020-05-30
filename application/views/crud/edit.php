@@ -59,12 +59,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="foodCategory" class="col-sm-2 col-form-label">Food Category</label>
+                            <label for="foodcategory" class="col-sm-2 col-form-label">Food Category</label>
                             <div class="col-sm-10">
-                            <select class="form-control" name="foodCategory" id="foodCategory">
+                            <select class="form-control" name="foodcategory" id="foodcategory">
                                 <!-- Food Category Options -->
                                 <?php foreach($cat as $c){?>
-                                <option <?php if($d->foodCategory == $c->categoryID) echo "selected"?> value="<?php echo $c->categoryID; ?>"><?php echo $c->categoryName;?></option>
+                                <option <?php if($d->foodcategory == $c->categoryID) echo "selected"?> value="<?php echo $c->categoryID; ?>"><?php echo $c->categoryName;?></option>
                                 <?php } ?>
                             </select>
                             </div>
@@ -116,7 +116,7 @@
                         
                         <?php foreach($data as $d){?>
                         <!-- Food Table Edit Start -->
-                        <?php echo form_open('admin/editFoodCategory');?>
+                        <?php echo form_open('admin/editfoodcategory');?>
                         <div class="form-group row">
                             <label for="id" class="col-sm-2 col-form-label">Category ID</label>
                             <div class="col-sm-10">

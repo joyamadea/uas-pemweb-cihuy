@@ -154,13 +154,13 @@ class Admin extends CI_Controller {
         $this->load->library('upload', $config);
 
         $this->form_validation->set_rules('foodName','Food Name','required');
-        $this->form_validation->set_rules('foodCategory','Food Category','required');
+        $this->form_validation->set_rules('foodcategory','Food Category','required');
         $this->form_validation->set_rules('stock','Stock','required|numeric');
         $this->form_validation->set_rules('desc','Description','required');
         $this->form_validation->set_rules('price','Price','required|numeric');
 
         $add['foodName'] = $this->input->post('foodName');
-        $add['foodCategory'] = $this->input->post('foodCategory');
+        $add['foodcategory'] = $this->input->post('foodcategory');
         $add['stock'] = $this->input->post('stock');
         $add['desc'] = $this->input->post('desc');
         $add['price'] = $this->input->post('price');
@@ -171,7 +171,7 @@ class Admin extends CI_Controller {
                     'form' => validation_errors());
 
             $val = array('foodName' => null,
-                        'foodCategory' => null,
+                        'foodcategory' => null,
                         'stock' => null,
                         'desc' => null,
                         'price' => null);
@@ -179,8 +179,8 @@ class Admin extends CI_Controller {
             if(isset($add['foodName'])){
                 $val['foodName'] = $add['foodName'];
             }
-            if(isset($add['foodCategory'])){
-                $val['foodCategory'] = $add['foodCategory'];
+            if(isset($add['foodcategory'])){
+                $val['foodcategory'] = $add['foodcategory'];
             }
             if(isset($add['stock'])){
                 $val['stock'] = $add['stock'];
@@ -207,7 +207,7 @@ class Admin extends CI_Controller {
                     'form' => validation_errors());
 
                     $val = array('foodName' => null,
-                        'foodCategory' => null,
+                        'foodcategory' => null,
                         'stock' => null,
                         'desc' => null,
                         'price' => null);
@@ -215,8 +215,8 @@ class Admin extends CI_Controller {
             if(isset($add['foodName'])){
                 $val['foodName'] = $add['foodName'];
             }
-            if(isset($add['foodCategory'])){
-                $val['foodCategory'] = $add['foodCategory'];
+            if(isset($add['foodcategory'])){
+                $val['foodcategory'] = $add['foodcategory'];
             }
             if(isset($add['stock'])){
                 $val['stock'] = $add['stock'];
@@ -245,7 +245,7 @@ class Admin extends CI_Controller {
 
     }
 
-    public function addFoodCategory(){
+    public function addfoodcategory(){
         $link = $this->input->post('link');
         $this->form_validation->set_rules('categoryName','Category Name','required');
         if($this->form_validation->run() == FALSE){
@@ -299,7 +299,7 @@ class Admin extends CI_Controller {
         $this->load->library('upload', $config);
 
         $this->form_validation->set_rules('foodName','Food Name','required');
-        $this->form_validation->set_rules('foodCategory','Food Category','required');
+        $this->form_validation->set_rules('foodcategory','Food Category','required');
         $this->form_validation->set_rules('stock','Stock','required|numeric');
         $this->form_validation->set_rules('desc','Description','required');
         $this->form_validation->set_rules('price','Price','required|numeric');
@@ -317,7 +317,7 @@ class Admin extends CI_Controller {
                 unlink($path);
                 $edit['id'] = $this->input->post('foodId');
                 $edit['name'] = $this->input->post('foodName');
-                $edit['category'] = $this->input->post('foodCategory');
+                $edit['category'] = $this->input->post('foodcategory');
                 $edit['stock'] = $this->input->post('stock');
                 $edit['photo'] = $data['file_name'];
                 $edit['desc'] = $this->input->post('desc');
@@ -338,7 +338,7 @@ class Admin extends CI_Controller {
                 $data = $this->upload->data();
                 $edit['id'] = $this->input->post('foodId');
                 $edit['name'] = $this->input->post('foodName');
-                $edit['category'] = $this->input->post('foodCategory');
+                $edit['category'] = $this->input->post('foodcategory');
                 $edit['stock'] = $this->input->post('stock');
                 $edit['photo'] = $this->input->post('old_image');
                 $edit['desc'] = $this->input->post('desc');
@@ -351,7 +351,7 @@ class Admin extends CI_Controller {
 
     }
 
-    public function editFoodCategory(){
+    public function editfoodcategory(){
         $link = $this->input->post('link');
         $this->form_validation->set_rules('categoryName','Category Name','required');
         if($this->form_validation->run() == FALSE){
