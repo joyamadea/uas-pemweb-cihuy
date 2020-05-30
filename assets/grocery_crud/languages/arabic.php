@@ -88,11 +88,11 @@
 	$lang['list_more'] = 'المزيد';
 
 	/* Added in version 1.5.6 */
-	$lang['list_search_column'] = '{column_name} بحث'
+	$lang['list_search_column'] = '{column_name} بحث';
 
 	/* Added in version 1.5.8 */
 	$lang['alert_delete_multiple'] = 'Are you sure that you want to delete those {items_amount} items?';
-
+	#^ada error disini ntah knapa? 
 	$lang['alert_delete_multiple_one'] = 'Are you sure that you want to delete this 1 item?';
 
 
